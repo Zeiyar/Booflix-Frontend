@@ -32,7 +32,7 @@ function Login (){
         <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="doulbi@gmail.com" required/>
         <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="type your password here..." required/>
         <button type="submit">Lez goooo</button>
-        <button onClick={()=>navigate("/register")}>Register?</button>
+        <button type="button" onClick={()=>navigate("/register")}>Register?</button>
         </form>
     )
 };

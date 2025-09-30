@@ -1,4 +1,5 @@
 import { useNavigate,useState } from "react";
+import { Link } from "react-router-dom";
 
 function Register(){
     const [email,setEmail] = useState("");
@@ -25,24 +26,22 @@ function Register(){
         const data = await res.json();
 
         if (res.ok){
-            await data.save();
             navigate("/")
         }
         else {
         alert(data.msg || "Erreur lors du login");
         }
     }catch(err){
-        console.err(err)
+        console.error(err);
     }}
-
-    if(!rules) (<strong>minimum 8 caractères 1 caractère spécial 1 numéro majuscule et minuscule</strong>)
-    if(same!==password) (<p>doit être le même mot de passe</p>)
 
     return (
         <form onSubmit={handleSubmit} className="registerForm">
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+            {!rules && (<strong>minimum 8 caractères 1 caractère spécial 1 numéro majuscule et minuscule</strong>)}
             <input type="password" value={same} onChange={(e)=>setSame(e.target.value)} required/>
+            {same!==password && (<strong>doit être le même mot de passe</strong>)}
             <button type="submit">S'inscrire maintenannnnt!</button>
             <small>Déjà un compte ? <Link to="login">se connecter</Link></small>
         </form>

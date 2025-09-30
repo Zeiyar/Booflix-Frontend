@@ -7,7 +7,7 @@ function Home (){
     const [page,setPage] = useState(1);
     const [year,setYear]= useState(2025);
     const navigate = useNavigate();
-    const genreId = useParams()
+    const {genreId} = useParams()
 
     useEffect(()=>{
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&page=${page}&primary_release_year=${year}${genreId ? `&with_genres=${genreId}` : ""}`)

@@ -25,7 +25,6 @@ const NavigationBar = () =>{
             .then(res => res.json())
             .then(data => {
                 setResearch(data.results)
-                research.ClassList.add("display:solid")
             })
             .catch(err=>console.error(err))
         } else {
