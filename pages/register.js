@@ -1,0 +1,52 @@
+import { useNavigate,useState } from "react";
+
+function Register(){
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [same,setSame] = useState("");
+    const navigate = useNavigate();
+
+    const rules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(password);
+    
+    const handleSubmit = async(e) => {
+        e.preventDefault();
+        try{
+        if(same!==password){
+            return alert("les deux mots de passe doivent être les mêmes");
+        }
+        if(!rules){
+            return alert("les règles du mot de passe ne sont pas respecter");
+        }
+        const res = await fetch("https://bubleflix-backend.onrender.com/api/auth/register",{
+            method:"POST",
+            headers: ({"Content-Type":"application/json"}),
+            body: JSON.stringify({email,password}),
+        })
+        const data = await res.json();
+
+        if (res.ok){
+            await data.save();
+            navigate("/")
+        }
+        else {
+        alert(data.msg || "Erreur lors du login");
+        }
+    }catch(err){
+        console.err(err)
+    }}
+
+    if(!rules) (<strong>minimum 8 caractères 1 caractère spécial 1 numéro majuscule et minuscule</strong>)
+    if(same!==password) (<p>doit être le même mot de passe</p>)
+
+    return (
+        <form onSubmit={handleSubmit} className="registerForm">
+            <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required/>
+            <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
+            <input type="password" value={same} onChange={(e)=>setSame(e.target.value)} required/>
+            <button type="submit">S'inscrire maintenannnnt!</button>
+            <small>Déjà un compte ? <Link to="login">se connecter</Link></small>
+        </form>
+    )
+}
+
+export default Register;

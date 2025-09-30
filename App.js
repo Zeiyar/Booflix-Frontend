@@ -3,12 +3,13 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 import See from "./pages/see";
 import Params from "./pages/params";
-import { useState, useEffect, useParams } from "react";
+import Register from "./pages/register";
+import { useState, useEffect} from "react";
 
 const NavigationBar = () =>{
     const [listOfCategory,setListOfCategory] = useState([]);
     const [research,setResearch] = useState([]);
-    const [search,setsearch] = useState("");
+    const [search,setSearch] = useState("");
 
     useEffect(()=>{
         fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
@@ -59,6 +60,7 @@ function App (){
             <Route path="/home/:genreId" element={<Home />}/>
             <Route path="/see/:id" element={<See />}/>
             <Route path="/params" element={<Params />}/>
+            <Route path="/register" element={<Register />}/>
         </Routes>
     </Router>)
 }
