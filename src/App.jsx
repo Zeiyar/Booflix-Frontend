@@ -1,35 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import Login from "./pages/login";
+import Home from "./pages/home";
+import See from "./pages/see";
+import Params from "./pages/params";
+import Register from "./pages/register";
+import { useState, useEffect} from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const NavigationBar = () =>{
+    const [listOfCategory,setListOfCategory] = useState([]);
+    const [research,setResearch] = useState([]);
+    const [search,setSearch] = useState("");
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    useEffect(()=>{
+        fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
+        .then(res=>res.json())
+        .then(data=>{
+            setListOfCategory(data.genres)
+        })
+    },[]);
+
+    useEffect(()=>{
+        if(search.length>0){
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&page=1`)
+            .then(res => res.json())
+            .then(data => {
+                setResearch(data.results)
+            })
+            .catch(err=>console.error(err))
+        } else {
+            setResearch([]);
+        }
+    },[search]);
+
+    return(
+        <nav className="navigationBar">
+        <Link to="/">Home</Link>
+        <Link to="/params">⚙️</Link>
+        <div className="toolpip">
+            <p>Category <span className="arrow">{">"}</span></p>
+            <ul>
+            {listOfCategory&& listOfCategory.map(list=><Link key={list.id} to={`/home/${list.id}`}><li>{list.name}</li></Link>)}
+            </ul>
+        </div>
+        <div>
+            <input onChange={(e)=>setSearch(e.target.value)} value={search}/>
+            {research.map((film)=><div className="research"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div>)}
+        </div>
+        </nav>
+    )
 }
 
-export default App
+function App (){
+    return(
+    <>
+        <NavigationBar />
+        <Routes>
+            <Route path="/" element={<Login />}/>
+            <Route path="/home/:genreId" element={<Home />}/>
+            <Route path="/see/:id" element={<See />}/>
+            <Route path="/params" element={<Params />}/>
+            <Route path="/register" element={<Register />}/>
+        </Routes>
+    </>)
+}
+
+export default App;
