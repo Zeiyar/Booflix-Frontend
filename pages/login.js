@@ -5,9 +5,11 @@ function Login (){
     const [password,setPassword] = useState("");
     const navigate = useNavigate();
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
+        await fetch("")
         navigate("/home")
     }
+
     return(
         <form onSubmit={()=>handleSubmit} className="login">
         <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="doulbi@gmail.com"/>
