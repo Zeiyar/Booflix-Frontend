@@ -12,7 +12,7 @@ const NavigationBar = () =>{
     const [search,setSearch] = useState("");
 
     useEffect(()=>{
-        fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
+        fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
         .then(res=>res.json())
         .then(data=>{
             setListOfCategory(data.genres)
@@ -21,7 +21,7 @@ const NavigationBar = () =>{
 
     useEffect(()=>{
         if(search.length>0){
-            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&sort_by=popularity.desc&page=1`)
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&sort_by=popularity.desc&page=1`)
             .then(res => res.json())
             .then(data => {
                 setResearch(data.results)

@@ -10,7 +10,7 @@ function Home (){
     const {genreId} = useParams()
 
     useEffect(()=>{
-            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&page=${page}&primary_release_year=${year}${genreId ? `&with_genres=${genreId}` : ""}`)
+            fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&page=${page}&primary_release_year=${year}${genreId ? `&with_genres=${genreId}` : ""}`)
             .then(res => res.json())
             .then(data => {
                 setMovies(data.results || [])

@@ -8,7 +8,7 @@ function See() {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR`
     )
       .then((res) => res.json())
       .then((data) => setMovie(data))
@@ -17,7 +17,7 @@ function See() {
 
   useEffect(() => {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR`
+      `https://api.themoviedb.org/3/movie/${id}/videos?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR`
     )
       .then((res) => res.json())
       .then((data) => {
