@@ -16,7 +16,7 @@ const NavigationBar = () =>{
     const location = useLocation();
 
     useEffect(()=>{
-        if(location.pathname==="/login"||location.pathname==="/register"){
+        if(location.pathname === "/" || location.pathname === "/register"){
             setNavbar(false);
         }
         else{

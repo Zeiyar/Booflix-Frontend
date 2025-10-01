@@ -13,23 +13,27 @@
 
 body{
     background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWI0Zm1oOWVvdjk1M3RjNjVicmw4NmJhYXB4YmV6cDhlb2YyNmYybCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RHIKETUlUINYvV7CAO/giphy.gif");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background-size: contain;
+    background-repeat: repeat;
     background-position: center; 
     color: var(--text);
     text-align: center;
+    width: 100%;
+    height: 100%;
 }
-img{
-    max-width: 80%;
-    height: auto;
-}
+
 .loadingGIF{
     width: 100%;
     height: 100%;
     z-index: 1000;
     position: absolute;
     text-align: center;
+    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWI0Zm1oOWVvdjk1M3RjNjVicmw4NmJhYXB4YmV6cDhlb2YyNmYybCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/kiWlpxD6hXmvTL8dio/giphy.gif");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center; 
 }
+
 /*menu défilant*/
 .toolpip{
     position: relative;
@@ -79,7 +83,30 @@ img{
     width: 20%;
     height: 40%;
 }
+/*poster HOME*/
 .homePoster{
     width: 3rem;
     height: 2rem;
+}
+.movie{
+    width: 1.5rem;
+    height: 1rem;
+}
+.movieContainer{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+/*Login/Register*/
+
+.login{
+    position: absolute;
+    border: solid 2px #0B0C10;
+    box-shadow: 2px #0B0C10;
+    width: 200px;
+    height: 400px;
+    margin: auto;
+    padding: 10px;
+    color: #F0F0F0;
 }

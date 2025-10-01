@@ -35,7 +35,7 @@ function Home (){
             </section>
         )}
 
-            <section>
+            <section className="movieContainer">
                 {movies.map((movie)=>(
                     <div key={movie.id} className="movie">
                         <a onClick={()=>movie && navigate(`/see/${movie.id}`)}>

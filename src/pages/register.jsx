@@ -36,7 +36,7 @@ function Register(){
     }}
 
     return (
-        <form onSubmit={handleSubmit} className="registerForm">
+        <form onSubmit={handleSubmit} className="login">
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required placeholder="doulbi@gmail.com"/>
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required placeholder="1234&abcD"/>
             {!rules && (<strong>minimum 8 caractères 1 caractère spécial 1 numéro majuscule et minuscule</strong>)}
