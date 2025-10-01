@@ -30,7 +30,7 @@ function Home (){
             {movies[0] && (
             <section>
                 <a onClick={()=>navigate(`/see/${movies[0].id}`)}>
-                    <img src={`https://image.tmdb.org/t/p/w500${movies[0].poster_path}`} alt={movies[0].title}/>
+                    <img src={`https://image.tmdb.org/t/p/w500${movies[0].poster_path}`} alt={movies[0].title} width="1 rem" height="2 rem"/>
                 </a>
             </section>
         )}

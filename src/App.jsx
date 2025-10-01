@@ -10,6 +10,7 @@ const NavigationBar = () =>{
     const [listOfCategory,setListOfCategory] = useState([]);
     const [research,setResearch] = useState([]);
     const [search,setSearch] = useState("");
+    const [showResult,setShowResult] = useState(false);
 
     useEffect(()=>{
         fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
@@ -24,17 +25,19 @@ const NavigationBar = () =>{
             fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&sort_by=popularity.desc&page=1`)
             .then(res => res.json())
             .then(data => {
-                setResearch(data.results)
+                setResearch(data.results);
+                setShowResult(true);
             })
             .catch(err=>console.error(err))
         } else {
             setResearch([]);
+            setShowResult(false);
         }
     },[search]);
 
     return(
         <nav className="navigationBar">
-        <Link to="/">Home</Link>
+        <Link to="/home">Home</Link>
         <Link to="/params">⚙️</Link>
         <div className="toolpip">
             <p>Category <span className="arrow">{">"}</span></p>
@@ -44,7 +47,7 @@ const NavigationBar = () =>{
         </div>
         <div>
             <input onChange={(e)=>setSearch(e.target.value)} value={search}/>
-            <div className="research">{research.map((film)=><div className="research-item"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div>)}</div>
+            <div className="research" style={{display: showResult ? "block" : "none"}}>{research.map((film)=><Link to={`/see/${film.id}`}><div className="research-item"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div></Link>)}</div>
         </div>
         </nav>
     )
