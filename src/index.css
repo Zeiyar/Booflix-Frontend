@@ -21,15 +21,16 @@ body{
     position: relative;
 }
 .toolpip ul{
-    display:none;
+    display: none;
     padding: 10px;
     position: absolute;
     background-color: var(--space-menu);
     border: 1px solid var(--space-menu-border);
     list-style: none;
 }
-.toolpip:hover{
+.toolpip:hover ul{
     display: block;
+    background-color: aliceblue;
 }
 .toolpip:hover .arrow{
     transform: rotate(90deg)
@@ -40,5 +41,23 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    border-bottom: blueviolet 1px;
+    background-color: blueviolet;
+    width: 100%;
+    color: aliceblue;
+}
+
+/*Research fenetre*/
+.research{
+    position: absolute;
+    width: 150px;
+    height: 300px;
+    background-color: aliceblue;
+    right: 0;
+    top: 0;
+}
+.research-item{
+    width: 50%;
+    height: 25%;
+    display: grid;
+    grid-auto-columns: auto;
 }

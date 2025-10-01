@@ -21,7 +21,7 @@ const NavigationBar = () =>{
 
     useEffect(()=>{
         if(search.length>0){
-            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&page=1`)
+            fetch(`https://api.themoviedb.org/3/search/movie?api_key=${import.meta.env.REACT_APP_TMDB_API_KEY}&language=fr-FR&query=${search}&sort_by=popularity.desc&page=1`)
             .then(res => res.json())
             .then(data => {
                 setResearch(data.results)
@@ -44,7 +44,7 @@ const NavigationBar = () =>{
         </div>
         <div>
             <input onChange={(e)=>setSearch(e.target.value)} value={search}/>
-            {research.map((film)=><div className="research"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div>)}
+            <div className="research">{research.map((film)=><div className="research-item"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div>)}</div>
         </div>
         </nav>
     )
@@ -57,6 +57,7 @@ function App (){
         <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/home/:genreId" element={<Home />}/>
+            <Route path="/home" element={<Home />}/>
             <Route path="/see/:id" element={<See />}/>
             <Route path="/params" element={<Params />}/>
             <Route path="/register" element={<Register />}/>
