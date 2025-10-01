@@ -5,12 +5,24 @@ import See from "./pages/see";
 import Params from "./pages/params";
 import Register from "./pages/register";
 import { useState, useEffect} from "react";
+import { useLocation } from "react-router-dom";
 
 const NavigationBar = () =>{
     const [listOfCategory,setListOfCategory] = useState([]);
     const [research,setResearch] = useState([]);
     const [search,setSearch] = useState("");
     const [showResult,setShowResult] = useState(false);
+    const [navbar,setNavbar] = useState(false);
+    const location = useLocation();
+
+    useEffect(()=>{
+        if(location.pathname==="/login"||location.pathname==="/register"){
+            setNavbar(false);
+        }
+        else{
+            setNavbar(true);
+        }
+    },[location])
 
     useEffect(()=>{
         fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&page=1`)
@@ -36,7 +48,8 @@ const NavigationBar = () =>{
     },[search]);
 
     return(
-        <nav className="navigationBar">
+        <>
+        {navbar && (<nav className="navigationBar">
         <Link to="/home">Home</Link>
         <Link to="/params">⚙️</Link>
         <div className="toolpip">
@@ -49,7 +62,7 @@ const NavigationBar = () =>{
             <input onChange={(e)=>setSearch(e.target.value)} value={search}/>
             <div className="research" style={{display: showResult ? "block" : "none"}}>{research.map((film)=><Link to={`/see/${film.id}`}><div className="research-item"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div></Link>)}</div>
         </div>
-        </nav>
+        </nav>)}</>
     )
 }
 

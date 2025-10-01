@@ -6,7 +6,7 @@ function Home (){
     const [page,setPage] = useState(1);
     const [year,setYear]= useState(2025);
     const navigate = useNavigate();
-    const {genreId} = useParams()
+    const {genreId} = useParams();
 
     useEffect(()=>{
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&page=${page}&primary_release_year=${year}${genreId ? `&with_genres=${genreId}` : ""}`)
@@ -28,9 +28,9 @@ function Home (){
             />
 
             {movies[0] && (
-            <section>
+            <section className="homePoster">
                 <a onClick={()=>navigate(`/see/${movies[0].id}`)}>
-                    <img src={`https://image.tmdb.org/t/p/w500${movies[0].poster_path}`} alt={movies[0].title} width="1 rem" height="2 rem"/>
+                    <img src={`https://image.tmdb.org/t/p/w500${movies[0].poster_path}`} alt={movies[0].title}/>
                 </a>
             </section>
         )}
