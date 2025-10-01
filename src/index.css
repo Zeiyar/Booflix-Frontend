@@ -6,9 +6,11 @@
 
 :root{
     --space : black;
-    --space-menu : rgb(46, 45, 45);
+    --space-menu : #1F2833;
     --space-menu-border : rgb(37, 37, 37);
-    --text : rgb(206, 134, 1);
+    --space-hover: #9c6caf;
+    --text : #F0F0F0;
+    --space-header : #6C3483;
 }
 
 body{
@@ -48,7 +50,7 @@ body{
 }
 .toolpip:hover ul{
     display: block;
-    background-color: aliceblue;
+    background-color: var(--space-hover);
     cursor: pointer;
 }
 .toolpip:hover .arrow{
@@ -60,9 +62,9 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: blueviolet;
+    background-color: var(--space-header);
     width: 100%;
-    color: aliceblue;
+    color: var(--text);
 }
 
 /*Research fenetre*/
@@ -73,24 +75,26 @@ body{
     position: absolute;
     width: 150px;
     height: 300px;
-    background-color: aliceblue;
+    background-color: var(--space);
 }
 .research-item{
-    width: 50%;
-    height: 25%;
+    width: 80%;
+    height: 90%;
 }
 .research-item img{
-    width: 20%;
-    height: 40%;
+    width: min-content;
+    height: min-content;
 }
 /*poster HOME*/
 .homePoster{
-    width: 3rem;
-    height: 2rem;
+    position: relative;
+    width: max-content;
+    height: max-content;
 }
 .movie{
-    width: 1.5rem;
-    height: 1rem;
+    position: relative;
+    width: min-content;
+    height: min-content;
 }
 .movieContainer{
     display: grid;
