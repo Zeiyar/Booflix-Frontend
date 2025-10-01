@@ -1,6 +1,5 @@
 import {useState,useEffect} from "react";
-import {useNavigate} from "react-router-dom";
-
+import {useNavigate,useParams} from "react-router-dom";
 
 function Home (){
     const [movies,setMovies] = useState([]);
