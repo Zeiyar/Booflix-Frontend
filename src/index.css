@@ -71,36 +71,44 @@ body{
 .research{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 5px;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
     position: absolute;
-    width: 150px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     background-color: var(--space);
+    z-index: 100;
 }
-.research-item{
-    width: 80%;
-    height: 90%;
-}
-.research-item img{
-    width: min-content;
-    height: min-content;
-}
+/*.research-item img{
+    width: 6rem;
+    height: 5rem;
+}*/
+
 /*poster HOME*/
 .homePoster{
     position: relative;
-    width: max-content;
-    height: max-content;
+    width: 100%;
+    height: 100%;
+    margin: 1rem;
 }
+/*Film liste home*/
 .movie{
     position: relative;
     width: min-content;
     height: min-content;
+    margin-top: 50px;
 }
 .movieContainer{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 30px;
 }
+
+a,Link,button:hover{
+    cursor: pointer;
+}
+
+
 
 /*Login/Register*/
 
@@ -110,7 +118,8 @@ body{
     box-shadow: 2px #0B0C10;
     width: 200px;
     height: 400px;
-    margin: auto;
     padding: 10px;
     color: #F0F0F0;
+    left: 50%;
+    top: 50%;
 }
