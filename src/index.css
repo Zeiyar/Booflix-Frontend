@@ -129,14 +129,30 @@ a,Link,button:hover{
 /*Login/Register*/
 
 .login{
-    background-color: var(--space-menu);
+    background-color: var(--space);
     position: absolute;
     border: solid 2px #0B0C10;
     box-shadow: 2px #0B0C10;
     width: 200px;
-    height: 400px;
+    height: 200px;
     padding: 10px;
     color: #F0F0F0;
-    left: 50%;
-    top: 50%;
+    left: 25%;
+    top: 25%;
+}
+
+.login input{
+    border: solid 2px var(--space-header);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+button{
+    background-color: rgb(181, 118, 1);
+    border: solid black;
+    padding: 1rem;
+}
+button:hover{
+    transform: scale(1.5);
+    background-color: orange;
 }
