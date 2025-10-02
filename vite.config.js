@@ -7,6 +7,6 @@ export default defineConfig({
     outDir: "dist",
   },
   optimizeDeps: {
-  include: ["jwt-decode"]
+  include: ["jwt-decode"],
 }
 });
