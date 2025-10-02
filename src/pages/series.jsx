@@ -6,7 +6,7 @@ export default function Series (){
 
     useEffect(()=>{
         async function list() {
-            const res = await fetch("/episodes");
+            const res = await fetch("https://bubleflix-backend.onrender.com/episodes");
             const data = await res.json();
             setEpisode(data.files);
             
@@ -18,7 +18,7 @@ export default function Series (){
     },[])
 
     async function loadEpisode(fileKey){
-        const res = await fetch(`/signed-url?file=${encodeURIComponent(fileKey)}`);
+        const res = await fetch(`https://bubleflix-backend.onrender.com/signed-url?file=${encodeURIComponent(fileKey)}`);
         const data = await res.json();
         setVideo(data.url);
     }
