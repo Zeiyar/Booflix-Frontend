@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgVideo from "../image/Space-Run-Art-GIF-by-PERFECTL00P.mp4";
 import vidBg from "../image/Running-Man-Space-GIF.mp4";
-import * as jwtDecode from "jwt-decode";
+import * as jwtDecodeModule from "jwt-decode";
 
 function Login (){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
+    const jwtDecode = jwtDecodeModule.default || jwtDecodeModule;
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -23,7 +24,7 @@ function Login (){
 
         if (res.ok) {
         const token = data.accessToken;
-        const decoded = jwtDecode.default(token);
+        const decoded = jwtDecode(token);
         const userId = decoded.id;
 
         localStorage.setItem("userId",userId);
