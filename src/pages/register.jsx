@@ -43,7 +43,7 @@ function Register(){
             <input type="password" value={same} onChange={(e)=>setSame(e.target.value)} required placeholder="1234&abcD"/>
             {same!==password && (<strong>doit être le même mot de passe</strong>)}
             <button type="submit">S'inscrire maintenannnnt!</button>
-            <small>Déjà un compte ? <Link to="login">se connecter</Link></small>
+            <small>Déjà un compte ? <Link to="/">se connecter</Link></small>
         </form>
     )
 }

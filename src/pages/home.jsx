@@ -5,9 +5,19 @@ function Home (){
     const [movies,setMovies] = useState([]);
     const [page,setPage] = useState(1);
     const [year,setYear]= useState(2025);
-    const [watchlist,_]= useState(null);
+    const [watchlist,setWatchlist]= useState([]);
     const navigate = useNavigate();
     const {genreId} = useParams();
+    const userId = localStorage.getItem("userId");
+
+    useEffect(()=>{
+        fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}`)
+        .then(res=>res.json())
+        .then(data=>{
+            setWatchlist(data)
+        })
+        .catch(err=>console.error(err));
+    },[userId]);
 
     useEffect(()=>{
             fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR&sort_by=popularity.desc&page=${page}&primary_release_year=${year}${genreId ? `&with_genres=${genreId}` : ""}`)
@@ -35,10 +45,20 @@ function Home (){
                 </a>
             </section>
         )}
+
             {watchlist && <section>
                 <h2>Continuer à Regarder</h2>
-                <div>{watchlist.map((movie)=><img src={`${movie.poster_path}`}/>)}</div>
+                <div>
+                    {watchlist.map((item)=>(
+                        <div key={item.file} onClick={()=>navigate(`/series/${item.file}`)}>
+                        <img src={item.poster} alt={item.title}/>
+                        <p>{item.title}</p>
+                    </div>
+                ))}
+                </div>
             </section>}
+
+
             <section className="movieContainer">
                 {movies.map((movie)=>(
                     <div key={movie.id} className="movie">
