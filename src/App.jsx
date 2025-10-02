@@ -4,8 +4,10 @@ import Home from "./pages/home";
 import See from "./pages/see";
 import Params from "./pages/params";
 import Register from "./pages/register";
+import Series from "./pages/series";
 import { useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
+import bgVideo from "./image/Black-And-White-Loop-GIF-by-Pi-Slices.mp4";
 
 const NavigationBar = () =>{
     const [listOfCategory,setListOfCategory] = useState([]);
@@ -51,6 +53,7 @@ const NavigationBar = () =>{
         <>
         {navbar && (<nav className="navigationBar">
         <Link to="/home">Home</Link>
+        <Link to="/serie">Séries</Link>
         <div className="toolpip">
             <p>Category <span className="arrow">{">"}</span></p>
             <ul>
@@ -70,7 +73,7 @@ function App (){
     return(
     <>
         <NavigationBar />
-        <video autoPlay loop muted className="background-vid"><source src="image/Black-And-White-Loop-GIF-by-Pi-Slices.mp4" type="video/mp4"/></video>
+        <video autoPlay loop muted className="background-vid" src={bgVideo} type="video/mp4"/>
         <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/home/:genreId" element={<Home />}/>
@@ -78,6 +81,7 @@ function App (){
             <Route path="/see/:id" element={<See />}/>
             <Route path="/params" element={<Params />}/>
             <Route path="/register" element={<Register />}/>
+            <Route path="/serie" element={<Series />}/>
         </Routes>
     </>)
 }

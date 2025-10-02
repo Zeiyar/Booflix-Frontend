@@ -5,6 +5,7 @@ function Home (){
     const [movies,setMovies] = useState([]);
     const [page,setPage] = useState(1);
     const [year,setYear]= useState(2025);
+    const [watchlist,_]= useState(null);
     const navigate = useNavigate();
     const {genreId} = useParams();
 
@@ -34,7 +35,10 @@ function Home (){
                 </a>
             </section>
         )}
-
+            {watchlist && <section>
+                <h2>Continuer à Regarder</h2>
+                <div>{watchlist.map((movie)=><img src={`${movie.poster_path}`}/>)}</div>
+            </section>}
             <section className="movieContainer">
                 {movies.map((movie)=>(
                     <div key={movie.id} className="movie">
