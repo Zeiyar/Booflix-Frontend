@@ -51,7 +51,6 @@ const NavigationBar = () =>{
         <>
         {navbar && (<nav className="navigationBar">
         <Link to="/home">Home</Link>
-        <Link to="/params">⚙️</Link>
         <div className="toolpip">
             <p>Category <span className="arrow">{">"}</span></p>
             <ul>
@@ -62,6 +61,7 @@ const NavigationBar = () =>{
             <input onChange={(e)=>setSearch(e.target.value)} value={search}/>
             <div className="research" style={{display: showResult ? "block" : "none"}}>{research.map((film)=><Link to={`/see/${film.id}`}><div className="research-item"><img src={`https://image.tmdb.org/t/p/w200${film.poster_path}`} alt={film.title}/><p>{film.name}</p></div></Link>)}</div>
         </div>
+        <Link to="/params">⚙️</Link>
         </nav>)}</>
     )
 }
@@ -70,6 +70,7 @@ function App (){
     return(
     <>
         <NavigationBar />
+        <video autoPlay loop muted className="background-vid"><source src="image/Black-And-White-Loop-GIF-by-Pi-Slices.mp4" type="video/mp4"/></video>
         <Routes>
             <Route path="/" element={<Login />}/>
             <Route path="/home/:genreId" element={<Home />}/>

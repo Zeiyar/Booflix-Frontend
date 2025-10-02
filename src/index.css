@@ -14,10 +14,7 @@
 }
 
 body{
-    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWI0Zm1oOWVvdjk1M3RjNjVicmw4NmJhYXB4YmV6cDhlb2YyNmYybCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/RHIKETUlUINYvV7CAO/giphy.gif");
-    background-size: contain;
-    background-repeat: repeat;
-    background-position: center; 
+    background-color: var(--space);
     color: var(--text);
     text-align: center;
     width: 100%;
@@ -28,17 +25,25 @@ body{
     width: 100%;
     height: 100%;
     z-index: 1000;
-    position: absolute;
-    text-align: center;
-    background-image: url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWI0Zm1oOWVvdjk1M3RjNjVicmw4NmJhYXB4YmV6cDhlb2YyNmYybCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/kiWlpxD6hXmvTL8dio/giphy.gif");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center; 
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.background-vid{
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
 /*menu défilant*/
 .toolpip{
     position: relative;
+    z-index: 10;
 }
 .toolpip ul{
     display: none;
@@ -51,10 +56,12 @@ body{
 .toolpip:hover ul{
     display: block;
     background-color: var(--space-hover);
-    cursor: pointer;
 }
-.toolpip:hover .arrow{
+.toolpip ul:hover .arrow,.toolpip .arrow:hover,.toolpip:hover .arrow{
     transform: rotate(90deg);
+}
+.toolpip:hover{
+    cursor: pointer;
 }
 
 /*bar de navigation*/
@@ -64,6 +71,11 @@ body{
     justify-content: space-around;
     background-color: var(--space-header);
     width: 100%;
+    color: var(--text);
+    height: 1.5rem;
+}
+.navigationBar a,Link{
+    text-decoration: none;
     color: var(--text);
 }
 
@@ -79,10 +91,11 @@ body{
     background-color: var(--space);
     z-index: 100;
 }
-/*.research-item img{
-    width: 6rem;
-    height: 5rem;
-}*/
+.research-item img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
 /*poster HOME*/
 .homePoster{
@@ -90,6 +103,7 @@ body{
     width: 100%;
     height: 100%;
     margin: 1rem;
+    object-fit: contain;
 }
 /*Film liste home*/
 .movie{
@@ -97,6 +111,7 @@ body{
     width: min-content;
     height: min-content;
     margin-top: 50px;
+    object-fit: contain;
 }
 .movieContainer{
     display: grid;
@@ -113,6 +128,7 @@ a,Link,button:hover{
 /*Login/Register*/
 
 .login{
+    background-color: var(--space-menu);
     position: absolute;
     border: solid 2px #0B0C10;
     box-shadow: 2px #0B0C10;

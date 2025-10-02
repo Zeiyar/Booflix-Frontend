@@ -33,7 +33,7 @@ function Login (){
 
     return(
         <>
-        {loading && (<div className="loadingGIF"></div>)}
+        {loading && (<video className="loadingGIF" autoPlay muted loop><source src="image/Space-Run-Art-GIF-by-PERFECTL00P.mp4" type="video/mp4"/></video>)}
         <form onSubmit={handleSubmit} className="login">
         <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="doulbi@gmail.com" required/>
         <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="type your password here..." required/>
