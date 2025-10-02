@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgVideo from "../image/Space-Run-Art-GIF-by-PERFECTL00P.mp4";
 import vidBg from "../image/Running-Man-Space-GIF.mp4";
-import jwtDecode from "jwt-decode";
+import * as jwtDecode from "jwt-decode";
 
 function Login (){
     const [email,setEmail] = useState("");
@@ -23,7 +23,7 @@ function Login (){
 
         if (res.ok) {
         const token = data.accessToken;
-        const decoded = jwtDecode(token);
+        const decoded = jwtDecode.default(token);
         const userId = decoded.id;
 
         localStorage.setItem("userId",userId);
