@@ -6,7 +6,7 @@ export default function Series (){
 
     useEffect(()=>{
         async function list() {
-            const res = await fetch("/episode");
+            const res = await fetch("/episodes");
             const data = await res.json();
             setEpisode(data.files);
             
