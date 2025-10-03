@@ -77,7 +77,7 @@ body{
     height: 2rem;
     position: fixed;
     z-index: 10;
-    margin-bottom: 4rem;
+    margin-bottom: 8rem;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -136,7 +136,7 @@ a,Link,button:hover{
 .login{
     position: absolute;
     border: solid 2px #0B0C10;
-    box-shadow: 4px 4px 10px orange;
+    box-shadow: 6px 6px 10px orange;
     width: 300px;
     height: 300px;
     padding: 10px;
