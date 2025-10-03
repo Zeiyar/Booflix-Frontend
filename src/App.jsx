@@ -53,7 +53,7 @@ const NavigationBar = () =>{
         <>
         {navbar && (<nav className="navigationBar">
         <Link to="/home">Home</Link>
-        <Link to="/serie">Séries</Link>
+        <Link to="/series">Séries</Link>
         <div className="toolpip">
             <p>Category <span className="arrow">{">"}</span></p>
             <ul>
@@ -81,7 +81,7 @@ function App (){
             <Route path="/see/:id" element={<See />}/>
             <Route path="/params" element={<Params />}/>
             <Route path="/register" element={<Register />}/>
-            <Route path="/serie" element={<Series />}/>
+            <Route path="/series" element={<Series />}/>
         </Routes>
     </>)
 }

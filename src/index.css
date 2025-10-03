@@ -58,7 +58,7 @@ body{
     display: block;
     background-color: var(--space-hover);
 }
-.toolpip ul:hover .arrow,.toolpip .arrow:hover,.toolpip:hover .arrow{
+.toolpip ul:hover .arrow,.toolpip .arrow:hover,.toolpip:hover .arrow,.arrow:hover{
     transform: rotate(90deg);
 }
 .toolpip:hover{
@@ -70,11 +70,14 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     background-color: var(--space-header);
     width: 100%;
     color: var(--text);
-    height: 2.5rem;
+    height: 2rem;
     position: fixed;
+    z-index: 10;
+    margin-bottom: 4rem;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -88,15 +91,18 @@ body{
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1rem;
     position: absolute;
-    width: 200px;
-    height: 200px;
+    width: 400px;
+    height: 400px;
     background-color: var(--space);
     z-index: 100;
-    max-width: 200px;
+    max-width: 400px;
     overflow: scroll;
+    scrollbar-width: 5px;
+    scrollbar-color: black;
 }
 .research-item img{
     object-fit: contain;
+    max-width: 200px;
 }
 
 /*poster HOME*/
@@ -135,8 +141,8 @@ a,Link,button:hover{
     height: 300px;
     padding: 10px;
     color: #F0F0F0;
-    left: 35%;
-    top: 30%;
+    left: 40%;
+    top: 35%;
     overflow: hidden;
 }
 
@@ -180,10 +186,12 @@ button:hover{
     gap: 10px;
     justify-content: flex-start;
     overflow: scroll;
+    scrollbar-width: 5px;
+    scrollbar-color: black;
 }
 .watchlistImg{
-    max-width: 20%;
-    object-fit: scale-down;
+    object-fit: contain;
+    width: 10rem;
     cursor: pointer;
     margin: auto;
     margin: 2rem 2rem 2rem 0.5rem;
