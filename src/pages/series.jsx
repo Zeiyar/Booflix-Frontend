@@ -44,7 +44,7 @@ export default function Series (){
     const progData = await progRes.json();
     const saved = progData.find((item)=>item.file===fileKey);
     setProgress(saved ? saved.progress : 0);
-    setLastSaved(0);} 
+    setHasTimed(0);} 
     catch (err) {
       console.error(err);
     }
