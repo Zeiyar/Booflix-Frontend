@@ -73,6 +73,7 @@ function App (){
     return(
     <>
         <NavigationBar />
+        <div className="divEntre"></div>
         <video autoPlay loop muted className="background-vid" src={bgVideo} type="video/mp4"/>
         <Routes>
             <Route path="/" element={<Login />}/>

@@ -79,15 +79,38 @@ body{
     width: 100%;
     color: var(--text);
     height: 2rem;
+    box-shadow: 5px #6C3483;
     position: fixed;
-    z-index: 10;
-    box-shadow: 5px 5px 7px #6C3483;
 }
 .navigationBar a,Link{
     text-decoration: none;
     color: var(--text);
 }
+.divEntre{
+    height: 2rem;
+    background-color: black;
+    width: 100%;
+}
 
+/*scrollbar*/
+.scrollable-div::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background: #222; /* couleur du fond de la scrollbar */
+    border-radius: 4px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+    background: orange; /* couleur de la barre */
+    border-radius: 4px;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb:hover {
+    background: #ffb84d; /* couleur au survol */
+}
 /*Research fenetre*/
 .research{
     display: grid;
@@ -101,15 +124,10 @@ body{
     z-index: 100;
     max-width: 400px;
     overflow: scroll;
-    scrollbar-width: 5px;
-    scrollbar-color: black;
 }
 .research-item img{
     object-fit: contain;
     max-width: 200px;
-}
-main{
-    margin-top: 2.5rem;
 }
 /*poster HOME*/
 .homePoster{
@@ -181,6 +199,10 @@ button:hover{
     transform: scale(1.2);
     background-color: orange;
 }
+img:hover{
+    transform: scale(1.2);
+    transition-duration: 0.5s;
+}
 
 /*watchlist*/
 
@@ -192,12 +214,11 @@ button:hover{
     gap: 10px;
     justify-content: flex-start;
     overflow: scroll;
-    scrollbar-width: 5px;
-    scrollbar-color: black;
+    cursor: pointer;
 }
 .watchlistImg{
     object-fit: contain;
-    width: 10rem;
+    width: 5rem;
     cursor: pointer;
     margin: auto;
     margin: 2rem 2rem 2rem 0.5rem;

@@ -13,6 +13,7 @@ export default function Series (){
     const [searchParams] = useSearchParams();
     const fileKey = decodeURIComponent(searchParams.get("file"));
     const [hasTimed,setHasTimed] = useState(0);
+    const [currentEpisode,setCurrentEpisode] = useState(0);
 
     useEffect(()=>{
         async function list() {
@@ -21,37 +22,34 @@ export default function Series (){
             const data = await res.json();
             setEpisode(data.files);
 
-        const decodedKey = fileKey ? decodeURIComponent(fileKey) : null;
-        const episodeToLoad = decodedKey && data.files.some(f => f === decodedKey) 
-                              ? decodedKey 
-                              : data.files[0];
-
-        if (episodeToLoad) loadEpisode(episodeToLoad);
+        const epToLoad = fileKey && data.files.includes(fileKey) ? fileKey : data.files[0];
+        setCurrentEpisode(epToLoad);
     }
     list();
     },[fileKey])
 
-    async function loadEpisode(fileKey){
+    useEffect(() => {
+        if (!currentEpisode) return;
 
-        try{const res = await fetch(`https://bubleflix-backend.onrender.com/signed-url?file=${encodeURIComponent(fileKey)}`);
-        const data = await res.json();
+        async function load() {
+            const res = await fetch(`https://bubleflix-backend.onrender.com/signed-url?file=${encodeURIComponent(currentEpisode)}`);
+            const data = await res.json();
+            setVideo(data.url);
+            setTitle(currentEpisode.split("/").pop());
+            setPoster(dragonBallPoster);
 
-        setVideo(data.url);
-        setPoster(dragonBallPoster);
-        setTitle(fileKey.split("/").pop())
-
-    const progRes = await fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}`);
-    const progData = await progRes.json();
-    const saved = progData.find((item)=>item.file===fileKey);
-    setProgress(saved ? saved.progress : 0);
-    setHasTimed(0);} 
-    catch (err) {
-      console.error(err);
-    }
-  }
+            const progRes = await fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}`);
+            const progData = await progRes.json();
+            const saved = progData.find((item)=>item.file === currentEpisode);
+            setProgress(saved ? saved.progress : 0);
+            setHasTimed(0);
+        }
+        load();
+    }, [currentEpisode]);
 
     const handleTimeUpdate = (e,fileKey) => {
         const currentTime = e.target.currentTime;
+        setProgress(currentTime);
             if (currentTime - hasTimed >10){
                 setHasTimed(currentTime);
                 fetch(`https://bubleflix-backend.onrender.com/watchlist`,{
@@ -83,8 +81,8 @@ export default function Series (){
             autoPlay/>
 
             <p>c est tout ce que nous avons pour l instant woohooo</p>
-        <select id="episodeSelect" value={fileKey || (episode[0] ?? "") } 
-        onChange={(e)=>loadEpisode(e.target.value)}>
+        <select id="episodeSelect" value={currentEpisode || ""} 
+        onChange={(e)=>setCurrentEpisode(e.target.value)}>
 
             {episode && 
                 episode.map((ep)=>(
