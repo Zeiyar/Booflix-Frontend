@@ -47,8 +47,9 @@ function Login (){
             autoPlay muted loop src={bgVideo} type="video/mp4"/>
         )}
         <div className="login">
-            <form onSubmit={handleSubmit} >
-                <video src={vidBg} autoPlay muted loop type="video/mp4" className="vidbg"/>
+            <video src={vidBg} autoPlay muted playsInline loop type="video/mp4" className="vidbg"/>
+
+            <form onSubmit={handleSubmit} className="login-content">    
                 <input type="email" onChange={(e)=>setEmail(e.target.value)} value={email} placeholder="doulbi@gmail.com" required/>
                 <input type="password" onChange={(e)=>setPassword(e.target.value)} value={password} placeholder="type your password here..." required/>
                 <button type="submit">Lez goooo</button>

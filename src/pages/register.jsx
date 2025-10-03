@@ -36,7 +36,9 @@ function Register(){
     }}
 
     return (
-        <form onSubmit={handleSubmit} className="login">
+        <div className="login">
+            <video src={vidBg} autoPlay muted playsInline loop type="video/mp4" className="vidbg"/>
+        <form onSubmit={handleSubmit} className="login-content">
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required placeholder="doulbi@gmail.com"/>
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required placeholder="1234&abcD"/>
             {!rules && (<strong>minimum 8 caractères 1 caractère spécial 1 numéro majuscule et minuscule</strong>)}
@@ -44,7 +46,7 @@ function Register(){
             {same!==password && (<strong>doit être le même mot de passe</strong>)}
             <button type="submit">S'inscrire maintenannnnt!</button>
             <small>Déjà un compte ? <Link to="/">se connecter</Link></small>
-        </form>
+        </form></div>
     )
 }
 

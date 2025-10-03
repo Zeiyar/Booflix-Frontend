@@ -18,13 +18,15 @@ export default function Series (){
             const res = await fetch("https://bubleflix-backend.onrender.com/episodes");
             const data = await res.json();
             setEpisode(data.files);
-            
-            if(data.files.length > 0){
+            if(fileKey){
+                loadEpisode(fileKey);
+            }
+            else if(data.files.length > 0){
                 loadEpisode(data.files[0]);
             }
         }
         list();
-    },[])
+    },[fileKey])
 
     async function loadEpisode(fileKey){
 
