@@ -2,16 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgVideo from "../image/Space-Run-Art-GIF-by-PERFECTL00P.mp4";
 import vidBg from "../image/Running-Man-Space-GIF.mp4";
+import { jwtDecode } from "jwt-decode";
 
 function Login (){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
-    let jwtDecode;
-    if (typeof window !== "undefined") {
-        jwtDecode = require("jwt-decode"); // CommonJS require dynamique
-    }
     
     const handleSubmit = async(e) => {
         e.preventDefault()
