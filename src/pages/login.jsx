@@ -22,9 +22,9 @@ function Login (){
         const data = await res.json();
 
         if (res.ok) {
-        const token = data.accessToken;
+        const token = data.accesstoken;
         const decoded = jwtDecode(token);
-        const userId = decoded.id;
+        const userId = decoded.id || data.user?.id;
 
         localStorage.setItem("userId",userId);
         localStorage.setItem("token",token);
