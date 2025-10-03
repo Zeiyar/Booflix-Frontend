@@ -25,6 +25,7 @@ function Login (){
         const token = data.accesstoken;
         const decoded = jwtDecode(token);
         const userId = decoded.id || data.user?.id;
+        console.log(userId);
 
         localStorage.setItem("userId",userId);
         localStorage.setItem("token",token);
@@ -46,6 +47,7 @@ function Login (){
             <video className="loadingGIF" 
             autoPlay muted loop src={bgVideo} type="video/mp4"/>
         )}
+        <h1 className="title">Booflix</h1>
         <div className="login">
             <video src={vidBg} autoPlay muted playsInline loop type="video/mp4" className="vidbg"/>
 

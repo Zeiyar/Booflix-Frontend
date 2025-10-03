@@ -80,7 +80,7 @@ export default function Series (){
                     videoRef.current.currentTime = progress;
             }}
             onTimeUpdate={(e)=> handleTimeUpdate(e,fileKey)}
-            />
+            autoPlay/>
 
             <p>c est tout ce que nous avons pour l instant woohooo</p>
         <select id="episodeSelect" value={fileKey || (episode[0] ?? "") } 
