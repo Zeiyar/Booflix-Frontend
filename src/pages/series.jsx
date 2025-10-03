@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import dragonBallPoster from "../image/Dragon-Ball-Wallpaper-dragon-ball-35542008-1280-1024-1967529842.jpg";
+import { useSearchParams } from "react-router-dom";
 
 export default function Series (){
     const [episode,setEpisode] = useState([]);
@@ -9,6 +10,8 @@ export default function Series (){
     const userId = localStorage.getItem("userId");
     const [title,setTitle] = useState("");
     const [poster,setPoster] = useState("");
+    const [searchParams] = useSearchParams();
+    const fileKey = searchParams.get("file");
 
     useEffect(()=>{
         async function list() {
@@ -57,8 +60,8 @@ export default function Series (){
                         headers:({"Content-Type":"application/json"}),
                         body: JSON.stringify({
                             userId,
-                            file:video,
-                            progress:currentTime,
+                            file : fileKey,
+                            progress : currentTime,
                             poster,
                             title
                         })
