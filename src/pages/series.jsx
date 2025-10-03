@@ -11,7 +11,7 @@ export default function Series (){
     const [title,setTitle] = useState("");
     const [poster,setPoster] = useState("");
     const [searchParams] = useSearchParams();
-    const fileKey = searchParams.get("file");
+    const fileKey = decodeURIComponent(searchParams.get("file"));
     const [hasTimed,setHasTimed] = useState(0);
 
     useEffect(()=>{
@@ -21,14 +21,14 @@ export default function Series (){
             const data = await res.json();
             setEpisode(data.files);
 
-            if(fileKey && data.files.includes(fileKey)){
-                loadEpisode(fileKey);
-            }
-            else if(data.files.length > 0){
-                loadEpisode(data.files[0]);
-            }
-        }
-        list();
+        const decodedKey = fileKey ? decodeURIComponent(fileKey) : null;
+        const episodeToLoad = decodedKey && data.files.some(f => f === decodedKey) 
+                              ? decodedKey 
+                              : data.files[0];
+
+        if (episodeToLoad) loadEpisode(episodeToLoad);
+    }
+    list();
     },[fileKey])
 
     async function loadEpisode(fileKey){

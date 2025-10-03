@@ -50,7 +50,8 @@ function Home (){
                 <h2>Continuer à Regarder</h2>
                 <div>
                     {watchlist.map((item)=>(
-                        <div className="watchlistContainer" key={item.file} onClick={()=>navigate(`/series?file=${encodeURIComponent(item.file)}`)}>
+                        <div className="watchlistContainer" key={item.file} 
+                        onClick={()=>navigate(`/series?file=${encodeURIComponent(item.file)}`)}>
                         <img className="watchlistImg" src={item.poster} alt={item.title}/>
                         <p>{item.title}</p>
                     </div>

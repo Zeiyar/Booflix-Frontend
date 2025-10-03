@@ -81,7 +81,7 @@ body{
     height: 2rem;
     position: fixed;
     z-index: 10;
-    margin-bottom: 15rem;
+    box-shadow: 5px 5px 7px #6C3483;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -108,7 +108,9 @@ body{
     object-fit: contain;
     max-width: 200px;
 }
-
+main{
+    margin-top: 2.5rem;
+}
 /*poster HOME*/
 .homePoster{
     position: relative;
@@ -140,7 +142,7 @@ a,Link,button:hover{
 .login{
     position: absolute;
     border: solid 2px #0B0C10;
-    box-shadow: 6px 6px 10px orange;
+    box-shadow: 2px 2px 6px orange;
     width: 300px;
     height: 300px;
     padding: 10px;
