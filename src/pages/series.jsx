@@ -47,7 +47,7 @@ export default function Series (){
         load();
     }, [currentEpisode]);
 
-    const handleTimeUpdate = (e,fileKey) => {
+    const handleTimeUpdate = (e,episode) => {
         const currentTime = e.target.currentTime;
         setProgress(currentTime);
             if (currentTime - hasTimed >10){
@@ -57,7 +57,7 @@ export default function Series (){
                     headers:({"Content-Type":"application/json"}),
                     body: JSON.stringify({
                         userId,
-                        file : fileKey,
+                        file : episode,
                         progress : currentTime,
                         poster,
                         title
@@ -77,7 +77,7 @@ export default function Series (){
                 if (progress && videoRef.current) 
                     videoRef.current.currentTime = progress;
             }}
-            onTimeUpdate={(e)=> handleTimeUpdate(e,fileKey)}
+            onTimeUpdate={(e)=> handleTimeUpdate(e,currentEpisode)}
             autoPlay/>
 
             <p>c est tout ce que nous avons pour l instant woohooo</p>
