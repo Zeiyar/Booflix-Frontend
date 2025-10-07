@@ -55,7 +55,7 @@ function Home (){
                         <img className="watchlistImg" src={item.poster} alt={item.title}/>
                         <p>{item.title}</p>
                     </div>
-                ))}
+            ))}
                 </div>
             </section>}
 

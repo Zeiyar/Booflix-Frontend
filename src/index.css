@@ -81,6 +81,7 @@ body{
     height: 2rem;
     box-shadow: 5px #6C3483;
     position: fixed;
+    z-index: 100;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -207,7 +208,7 @@ img:hover{
 /*watchlist*/
 
 .watchlistContainer{
-    height: 5rem;
+    height: 20rem;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -219,7 +220,8 @@ img:hover{
 .watchlistImg{
     object-fit: contain;
     width: 5rem;
+    height: 5rem;
     cursor: pointer;
     margin: auto;
-    margin: 2rem 2rem 2rem 0.5rem;
+    margin: 0.2rem 0.2rem 0.2rem 0.1rem;
 }

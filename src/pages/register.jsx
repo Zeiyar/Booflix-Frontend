@@ -37,7 +37,6 @@ function Register(){
 
     return (
         <div className="login">
-            <video src={vidBg} autoPlay muted playsInline loop type="video/mp4" className="vidbg"/>
         <form onSubmit={handleSubmit} className="login-content">
             <input type="email" value={email} onChange={(e)=>setEmail(e.target.value)} required placeholder="doulbi@gmail.com"/>
             <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} required placeholder="1234&abcD"/>
