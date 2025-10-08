@@ -8,9 +8,9 @@
     --space : black;
     --space-menu : #1F2833;
     --space-menu-border : rgb(37, 37, 37);
-    --space-hover: #9c6caf;
+    --space-hover: #67018f;
     --text : #F0F0F0;
-    --space-header : #6C3483;
+    --space-header : #330147;
 }
 
 body{
@@ -79,9 +79,10 @@ body{
     width: 100%;
     color: var(--text);
     height: 2rem;
-    box-shadow: 5px #6C3483;
+    box-shadow: 5px #38004e;
     position: fixed;
     z-index: 100;
+    opacity: 0.5;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -224,4 +225,20 @@ img:hover{
     cursor: pointer;
     margin: auto;
     margin: 0.2rem 0.2rem 0.2rem 0.1rem;
+}
+
+/*Options/paramètres*/
+
+.optionPage{
+    margin-top: 50px;
+    overflow: scroll;
+    height: 200%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+.optionPage p{
+    margin: auto;
+    padding: auto;
 }

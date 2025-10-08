@@ -2,21 +2,22 @@ import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 
 function Params (){
-    const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY);
+    const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
     const [oldPassword,setOldPassword] = useState("");
     const [newPassword,setNewPassword] = useState("");
     const [loading,setLoading] = useState(false);
-    const [message,setMessage] = useState("");
+    const [message,setMessage] = useState("Ton mot de passe est toujours le même");
     const [same,setSame] = useState("");
     const [abo,setAbo] = useState("Gratuit");
     /*const [temps,] = useState("1 Semaine");*/
     
     const rules = newPassword ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(newPassword): false;
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user")||{});
+    const user = JSON.parse(localStorage.getItem("user")||"{}");
     const email = user?.email;
 
     const handleModify = async() => {
+        e.preventDefault();
         setLoading(true);
         setMessage("");
 
@@ -29,7 +30,7 @@ function Params (){
         });
 
         const data = await res.json();
-        if (res.ok) {setMessage("Mot de passe changé avec succès !");}
+        if (res.ok) {setMessage("Ton mot de passe à changé avec succès !!");}
 
         else {setMessage(`${data.message}`);}
 
@@ -59,7 +60,7 @@ function Params (){
  mettre dans abo quand probleme et solution trouvé
 */
     return (
-        <>
+        <main className="optionsPage">
         <header>
             <h1>MOUHAHAHAHA</h1>
             <p>Welcome to params</p>
@@ -78,7 +79,7 @@ function Params (){
                 <p>limitation a 1 adresse ip que vous choisissez en vous connectant</p>
                 <p>possibilité de la changer tout les 6 mois (comme basicfit lol)</p>
                 <p>4.99e</p>
-                <button onClick={handleSubscription("Basic")} disabled={loading||abo==="Basic"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={() =>handleSubscription("Basic")} disabled={loading||abo==="Basic"}>{loading ? "Chargement..." : "Choisir"}</button>
             </div>
 
             <div>
@@ -86,7 +87,7 @@ function Params (){
                 <p>3 adresse ip qui seront aussi choisi en vous connectant avec les trois adresse</p>
                 <p>changer aussi tout les 6 mois mais pour les trois dcp 3 changement tout les 6 mois</p>
                 <p>6.99</p>
-                <button onClick={handleSubscription("Styled")} disabled={loading||abo==="Styled"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={() =>handleSubscription("Styled")} disabled={loading||abo==="Styled"}>{loading ? "Chargement..." : "Choisir"}</button>
             </div>
 
             <div>
@@ -103,8 +104,7 @@ function Params (){
         <section>
             <h2 id="mdp">Change de mot de passe</h2>
             <span>{email}</span>
-            <div>
-                <strong>veuillez taper le même mot de passe pour pouvoir le changer</strong>
+            <form onSubmit={()=>handleModify}>
                 
                 <input
                     type="password"
@@ -130,16 +130,13 @@ function Params (){
                 {same!==newPassword && (<strong>doit être le même mot de passe</strong>)}
                 
             
-                <button 
-                    onClick={handleModify}
-                    disabled={!rules || !oldPassword || !newPassword || loading || same!==newPassword}
-                >
+                <button type="submit" disabled={!rules || !oldPassword || !newPassword || loading || same!==newPassword}>
                         {loading ? "Changement..." : "Modifier"}
                 </button>
                     {message && <p>{message}</p>}
-            </div>
+            </form>
         </section>
-        </>
+        </main>
     )
 }
 export default Params;
