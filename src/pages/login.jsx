@@ -29,7 +29,7 @@ function Login (){
             id: userId, email: data.user.email
         }
 
-        localStorage.setItem("user",user);
+        localStorage.setItem("user",JSON.stringify(user));
         localStorage.setItem("token",token);
 
         setLoading(true);

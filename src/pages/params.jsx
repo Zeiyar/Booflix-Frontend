@@ -11,9 +11,9 @@ function Params (){
     const [abo,setAbo] = useState("Gratuit");
     /*const [temps,] = useState("1 Semaine");*/
     
-    const rules = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(newPassword);
+    const rules = newPassword ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(newPassword): false;
     const token = localStorage.getItem("token");
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user")||{});
     const email = user?.email;
 
     const handleModify = async() => {
