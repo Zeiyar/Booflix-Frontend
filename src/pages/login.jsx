@@ -15,7 +15,7 @@ function Login (){
         try {
             const res = await fetch("https://bubleflix-backend.onrender.com/api/auth/login",{
             method:"POST",
-            headers: ({"Content-Type":"application/json"}),
+            headers: {"Content-Type":"application/json"},
             body: JSON.stringify({email, password}),
             credentials: "include",
         });
@@ -25,13 +25,18 @@ function Login (){
         const token = data.accesstoken;
         const decoded = jwtDecode(token);
         const userId = decoded.id || data.user?.id;
-        console.log(userId);
+        const user = {
+            id: userId, email: data.user.email
+        }
 
-        localStorage.setItem("userId",userId);
+        localStorage.setItem("user",user);
         localStorage.setItem("token",token);
 
         setLoading(true);
-        setTimeout(()=>navigate("/home"),2000)
+        setTimeout(()=>{
+            setLoading(false);
+            navigate("/home");
+        },2000)
         }
         else {
             alert(data.msg || "Erreur lors du login");

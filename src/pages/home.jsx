@@ -28,6 +28,22 @@ function Home (){
             .catch(err=>console.error(err))
         },[genreId,page,year]);
 
+    const handleDelete = async(id) => {
+        try {const res = await fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}/${id}`,{
+            method: "DELETE",
+        });
+        if (!res.ok){
+            throw new Error("Erreur lors de la suppression");
+        };
+
+        const data = await res.json();
+        console.log(data.message);
+        setWatchlist((prev)=>prev.filter((a)=>a._id !== id));
+    }catch(err){
+            console.error(err);
+        }
+    }
+
     return(
         <>
 
@@ -54,6 +70,7 @@ function Home (){
                         onClick={()=>navigate(`/series?file=${encodeURIComponent(item.file)}`)}>
                         <img className="watchlistImg" src={item.poster} alt={item.title}/>
                         <p>{item.title}</p>
+                        <button onClick={()=>handleDelete(item._id)}>X</button>
                     </div>
             ))}
                 </div>
