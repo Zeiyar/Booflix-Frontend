@@ -58,6 +58,7 @@ function Params (){
         });
         const data = await res.json();
         const stripe = await stripePromise;
+        console.log(stripe);
         console.log(data.url);
         setAbo(plan);
 
@@ -128,7 +129,8 @@ else {
                 <p>recevez aussi une casquette broder (porter par le dévelloppeur du site clin d oeil)</p>
                 <p>si vous aimez les danseur bg et muscler je m engage personnellement a venir danser chez vous</p>
                 <strong>9.99e!!!</strong><strong>   ̶ ̶1̶4̶.̶9̶9̶ </strong>
-                <button onClick={() => { console.log("Bouton cliqué"); }}>Test</button>
+                <button onClick={()=>handleSubscription("Premium")} 
+                disabled={loading||abo==="Premium"}>{loading ? "Chargement..." : "Choisir"}</button>
             </div>
         </section>
 
