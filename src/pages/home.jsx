@@ -57,7 +57,7 @@ function Home (){
         if (trailer) setVideoUrl(trailer.key);
       })
       .catch((err) => console.error(err));
-  }, [id]);
+  }, [movies[0]]);
 
     return(
         <>
