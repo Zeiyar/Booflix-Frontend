@@ -29,6 +29,23 @@ function Home (){
             .catch(err=>console.error(err))
         },[genreId,page,year]);
 
+    useEffect(() => {
+        if (!movies.length) return;
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movies[0].id}/videos?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const trailer = data.results.find(
+          (v) => v.site === "YouTube" && v.type === "Trailer"
+        );
+        if (trailer) setVideoUrl(trailer.key);
+        else {setVideoUrl(null);
+        }})
+      
+      .catch((err) => console.error(err));
+  }, [movies]);
+
     const handleDelete = async(id) => {
         try {const res = await fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}/${id}`,{
             method: "DELETE",
@@ -44,20 +61,6 @@ function Home (){
             console.error(err);
         }
     }
-
-    useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movies[0].id}/videos?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        const trailer = data.results.find(
-          (v) => v.site === "YouTube" && v.type === "Trailer"
-        );
-        if (trailer) setVideoUrl(trailer.key);
-      })
-      .catch((err) => console.error(err));
-  }, [movies[0]]);
 
     return(
         <>
@@ -78,6 +81,7 @@ function Home (){
           frameBorder="0"
           width="800"
           height="450"
+          autoPlay
         />):
             (movies[0] && (
             <section className="homePoster">
