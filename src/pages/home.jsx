@@ -116,7 +116,7 @@ function Home (){
                     </div>
                 ))}
             </section>
-            <section style={{width: large, height: large}}>
+            <section style={{width: "20px", height: "20px"}}>
                 <button onClick={()=>{page>1 && setPage(page-1)}}>{page-1}</button>
                 <span>{page}</span>
                 <button onClick={()=>setPage(page+1)}>{page+1}</button>
