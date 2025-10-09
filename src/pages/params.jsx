@@ -18,8 +18,6 @@ function Params (){
     const user = JSON.parse(localStorage.getItem("user")||"{}");
     const email = user?.email;
 
-    console.log(token);
-
     const handleModify = async(e) => {
         e.preventDefault();
         setLoading(true);
@@ -61,6 +59,7 @@ function Params (){
 
         setAbo(plan);
         
+        console.log(data.url);
         window.location.href = data.url;
         setTimeout(()=>{setLoading(false)},2000);
     } 
