@@ -47,36 +47,61 @@ function Params (){
 
     const handleSubscription = async(plan) => {
         const token = localStorage.getItem("token");
-        console.log(data.url);
-        console.log(token);
+        console.log("Bouton cliqué pour plan:", plan);
+        console.log("Token:", token);
+
+        if (!token) {
+            alert("Vous devez être connecté pour vous abonner");
+            return;
+        }
+
         setLoading(true);
-        const res = await fetch(`https://bubleflix-backend.onrender.com/api/subscription/create-checkout-session`,{
-            method: "POST",
-            headers: {"Content-Type":"application/json", Authorization: `Bearer ${token}`},
-            body: JSON.stringify({plan}),
-            credentials: "include",
-        });
-        const data = await res.json();
-        const stripe = await stripePromise;
-        console.log(stripe);
-        console.log(data.url);
-        setAbo(plan);
+
+        try {
+            const res = await fetch(
+            "https://bubleflix-backend.onrender.com/api/subscription/create-checkout-session",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify({ plan }),
+                credentials: "include",
+            }
+        );
 
         if (!res.ok) {
-            console.error("Erreur Stripe:", data);
-            alert(data.msg || "Impossible de créer la session");
+            const errData = await res.json();
+            console.error("Erreur création session:", errData);
+            alert(errData.msg || "Impossible de créer la session");
             setLoading(false);
             return;
+        }
 
-}       if (data.url) {
-        window.location.href = data.url;
-}       
-else {
-            console.error("URL Stripe manquante", data);
+        const data = await res.json();
+        console.log("Réponse Stripe:", data);
+
+        if (!data.url) {
+            console.error("URL Stripe manquante:", data);
             alert("Impossible de créer la session Stripe");
             setLoading(false);
-}
-    } 
+            return;
+        }
+
+        setAbo(plan);
+        const stripe = await stripePromise;
+        console.log("Stripe object:", stripe);
+
+        window.location.href = data.url;
+
+    } catch (err) {
+        console.error("Erreur réseau:", err);
+        alert("Erreur réseau ou serveur");
+        setLoading(false);
+    }
+};
+ 
 
     function logout(){
         fetch("/logout",({
@@ -98,8 +123,8 @@ else {
             <p>Welcome to params</p>
             <a href="#abo">Abonnement</a>
             <a href="#mdp">Changer de mdp</a>
-            <p>N'hésiter pas a nous poster vos problèmes sur ce <a href="https://reablog.netlify.app/">blog</a> 
-            que j ai créer uniquement pour ça (ouiouioui) si vous voulez que je rajoute des films ou séries aussi !</p>
+            <p>N'hésiter pas a nous poster vos problèmes sur ce <a href="https://reablog.netlify.app/" target="_blank">blog</a> 
+             que j ai créer uniquement pour ça (ouiouioui) si vous voulez que je rajoute des films ou séries aussi !</p>
         </header>
         
         <section>
