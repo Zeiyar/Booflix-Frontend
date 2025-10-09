@@ -47,6 +47,8 @@ function Params (){
 
     const handleSubscription = async(plan) => {
         const token = localStorage.getItem("token");
+        console.log(data.url);
+        console.log(token);
         setLoading(true);
         const res = await fetch(`https://bubleflix-backend.onrender.com/api/subscription/create-checkout-session`,{
             method: "POST",
@@ -107,7 +109,7 @@ else {
                 <p>limitation a 1 adresse ip que vous choisissez en vous connectant</p>
                 <p>possibilité de la changer tout les 6 mois (comme basicfit lol)</p>
                 <p>4.99e</p>
-                <button onClick={() =>handleSubscription("Basic")} disabled={loading||abo==="Basic"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={()=>handleSubscription("Basic")} disabled={loading||abo==="Basic"}>{loading ? "Chargement..." : "Choisir"}</button>
             </div>
 
             <div>
@@ -115,7 +117,7 @@ else {
                 <p>3 adresse ip qui seront aussi choisi en vous connectant avec les trois adresse</p>
                 <p>changer aussi tout les 6 mois mais pour les trois dcp 3 changement tout les 6 mois</p>
                 <p>6.99</p>
-                <button onClick={() =>handleSubscription("Styled")} disabled={loading||abo==="Styled"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={()=>handleSubscription("Styled")} disabled={loading||abo==="Styled"}>{loading ? "Chargement..." : "Choisir"}</button>
             </div>
 
             <div>
