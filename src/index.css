@@ -82,7 +82,6 @@ body{
     box-shadow: 5px #38004e;
     position: fixed;
     z-index: 100;
-    opacity: 0.5;
 }
 .navigationBar a,Link{
     text-decoration: none;
@@ -202,7 +201,7 @@ button:hover{
     background-color: orange;
 }
 img:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition-duration: 0.5s;
 }
 
@@ -232,13 +231,15 @@ img:hover{
 .optionPage{
     margin-top: 50px;
     overflow: scroll;
-    height: 200%;
-    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 15vw;
 }
 .optionPage p{
-    margin: auto;
-    padding: auto;
+    margin: 10vw;
+    padding: 10vw;
+}
+
+section{
+    margin-top: 100px;
 }

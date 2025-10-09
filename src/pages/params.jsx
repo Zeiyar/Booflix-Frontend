@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
+import { useNavigate } from "react-router-dom";
 
 function Params (){
     const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
@@ -9,6 +10,7 @@ function Params (){
     const [message,setMessage] = useState("Ton mot de passe est toujours le même");
     const [same,setSame] = useState("");
     const [abo,setAbo] = useState("Gratuit");
+    const navigate = useNavigate();
     /*const [temps,] = useState("1 Semaine");*/
     
     const rules = newPassword ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(newPassword): false;
@@ -19,7 +21,7 @@ function Params (){
     const handleModify = async() => {
         e.preventDefault();
         setLoading(true);
-        setMessage("");
+        setMessage("Demande de changement");
 
         try {
         const res = await fetch(`https://bubleflix-backend.onrender.com/api/auth/change-password`,{
@@ -30,7 +32,9 @@ function Params (){
         });
 
         const data = await res.json();
-        if (res.ok) {setMessage("Ton mot de passe à changé avec succès !!");}
+        if (res.ok) {setMessage("Ton mot de passe à changé avec succès !! Redirection pour reconnection...");
+            logout;
+        }
 
         else {setMessage(`${data.message}`);}
 
@@ -56,6 +60,17 @@ function Params (){
         window.location.href = data.url;
         setTimeout(()=>{setLoading(false)},2000);
     } 
+
+    function logout(){
+        fetch("/logout",({
+            method:"POST",
+            credentials: "include",
+        }))
+        .then(()=>{
+            localStorage.removeItem("token");
+            navigate("/");
+        })
+    }
 /*<p>Vous avez actuellement l abonnement {abo} et il vous reste {temps} pour changer d adresse ip</p>
  mettre dans abo quand probleme et solution trouvé
 */
@@ -136,6 +151,7 @@ function Params (){
                     {message && <p>{message}</p>}
             </form>
         </section>
+        <button style={{background: red,height:"50px",width:"100px"}} onClick={()=>logout}>Déconnexion</button>
         </main>
     )
 }

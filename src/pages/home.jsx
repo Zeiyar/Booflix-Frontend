@@ -9,6 +9,7 @@ function Home (){
     const navigate = useNavigate();
     const {genreId} = useParams();
     const userId = localStorage.getItem("userId");
+    const [videoUrl,setVideoUrl] = useState(null);
 
     useEffect(()=>{
         fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}`)
@@ -44,6 +45,20 @@ function Home (){
         }
     }
 
+    useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/movie/${movies[0].id}/videos?api_key=${import.meta.env.VITE_APP_TMDB_API_KEY}&language=fr-FR`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        const trailer = data.results.find(
+          (v) => v.site === "YouTube" && v.type === "Trailer"
+        );
+        if (trailer) setVideoUrl(trailer.key);
+      })
+      .catch((err) => console.error(err));
+  }, [id]);
+
     return(
         <>
 
@@ -54,13 +69,23 @@ function Home (){
             value={year}
             />
 
-            {movies[0] && (
+            {videoUrl ? (
+        <iframe
+          src={`https://www.youtube.com/embed/${videoUrl}`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="trailer"
+          frameBorder="0"
+          width="800"
+          height="450"
+        />):
+            (movies[0] && (
             <section className="homePoster">
                 <a onClick={()=>navigate(`/see/${movies[0].id}`)}>
                     <img src={`https://image.tmdb.org/t/p/w500${movies[0].poster_path}`} alt={movies[0].title}/>
                 </a>
             </section>
-        )}
+        ))}
 
             {watchlist && <section>
                 <h2>Continuer à Regarder</h2>
@@ -72,7 +97,8 @@ function Home (){
                                 <img className="watchlistImg" src={item.poster} alt={item.title}/>
                                 <p>{item.title}</p>
                         </div>
-                        <button onClick={()=>handleDelete(item._id)}>X</button>
+                        <button style={{
+                            height:"30px", width:"30px"}} onClick={()=>handleDelete(item._id)}>X</button>
                         </>
             ))}
                 </div>
@@ -90,7 +116,7 @@ function Home (){
                     </div>
                 ))}
             </section>
-            <section>
+            <section style={{width: large, height: large}}>
                 <button onClick={()=>{page>1 && setPage(page-1)}}>{page-1}</button>
                 <span>{page}</span>
                 <button onClick={()=>setPage(page+1)}>{page+1}</button>
