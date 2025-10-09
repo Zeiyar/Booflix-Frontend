@@ -79,9 +79,8 @@ function Home (){
           allowFullScreen
           title="trailer"
           frameBorder="0"
-          width="800"
-          height="450"
-          autoPlay
+          width="900"
+          height="700"
         />):
             (movies[0] && (
             <section className="homePoster">
