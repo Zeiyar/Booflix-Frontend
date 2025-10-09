@@ -56,12 +56,22 @@ function Params (){
         });
         const data = await res.json();
         const stripe = await stripePromise;
-
-        setAbo(plan);
-        
         console.log(data.url);
+
+        if (!res.ok) {
+            console.error("Erreur Stripe:", data);
+            alert(data.msg || "Impossible de créer la session");
+            setLoading(false);
+            return;
+
+}       if (data.url) {
         window.location.href = data.url;
-        setTimeout(()=>{setLoading(false)},2000);
+}       
+else {
+            console.error("URL Stripe manquante", data);
+            alert("Impossible de créer la session Stripe");
+            setLoading(false);
+}
     } 
 
     function logout(){
