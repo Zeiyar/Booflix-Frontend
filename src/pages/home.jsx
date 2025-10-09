@@ -66,12 +66,6 @@ function Home (){
         <>
 
         <main>
-            <p>Regarder les meilleurs films par années !!</p>
-            <input type="number" 
-            onChange={(e)=>setYear(e.target.value)} 
-            value={year}
-            />
-
             {videoUrl ? (
         <iframe
           src={`https://www.youtube.com/embed/${videoUrl}`}
@@ -79,7 +73,7 @@ function Home (){
           allowFullScreen
           title="trailer"
           frameBorder="0"
-          width="900"
+          width="100%"
           height="700"
         />):
             (movies[0] && (
@@ -89,6 +83,12 @@ function Home (){
                 </a>
             </section>
         ))}
+
+        <p>Regarder les meilleurs films par années !!</p>
+            <input type="number" 
+            onChange={(e)=>setYear(e.target.value)} 
+            value={year}
+            />
 
             {watchlist && <section>
                 <h2>Continuer à Regarder</h2>
@@ -119,7 +119,7 @@ function Home (){
                     </div>
                 ))}
             </section>
-            <section style={{width: "20px", height: "20px"}}>
+            <section className="paging">
                 <button onClick={()=>{page>1 && setPage(page-1)}}>{page-1}</button>
                 <span>{page}</span>
                 <button onClick={()=>setPage(page+1)}>{page+1}</button>

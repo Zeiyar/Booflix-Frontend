@@ -18,7 +18,9 @@ function Params (){
     const user = JSON.parse(localStorage.getItem("user")||"{}");
     const email = user?.email;
 
-    const handleModify = async() => {
+    console.log(token);
+
+    const handleModify = async(e) => {
         e.preventDefault();
         setLoading(true);
         setMessage("Demande de changement");
@@ -33,7 +35,7 @@ function Params (){
 
         const data = await res.json();
         if (res.ok) {setMessage("Ton mot de passe à changé avec succès !! Redirection pour reconnection...");
-            logout;
+            logout();
         }
 
         else {setMessage(`${data.message}`);}
@@ -47,16 +49,18 @@ function Params (){
 
     const handleSubscription = async(plan) => {
         const token = localStorage.getItem("token");
+        setLoading(true);
         const res = await fetch(`https://bubleflix-backend.onrender.com/api/subscription/create-checkout-session`,{
             method: "POST",
             headers: {"Content-Type":"application/json", Authorization: `Bearer ${token}`},
             body: JSON.stringify({plan}),
+            credentials: "include",
         });
         const data = await res.json();
         const stripe = await stripePromise;
 
         setAbo(plan);
-        setLoading(true);
+        
         window.location.href = data.url;
         setTimeout(()=>{setLoading(false)},2000);
     } 
@@ -119,7 +123,7 @@ function Params (){
         <section>
             <h2 id="mdp">Change de mot de passe</h2>
             <span>{email}</span>
-            <form onSubmit={()=>handleModify}>
+            <form onSubmit={handleModify}>
                 
                 <input
                     type="password"
@@ -151,7 +155,7 @@ function Params (){
                     {message && <p>{message}</p>}
             </form>
         </section>
-        <button style={{background: "red",height:"50px",width:"100px"}} onClick={()=>logout}>Déconnexion</button>
+        <button style={{background: "red",height:"50px",width:"100px"}} onClick={logout}>Déconnexion</button>
         </main>
     )
 }

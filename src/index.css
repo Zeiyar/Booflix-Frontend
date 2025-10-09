@@ -1,164 +1,203 @@
-*{
+/* RESET GLOBAL */
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-:root{
-    --space : black;
-    --space-menu : #1F2833;
-    --space-menu-border : rgb(37, 37, 37);
-    --space-hover: #67018f;
-    --text : #F0F0F0;
-    --space-header : #330147;
+:root {
+    --background-color: black;
+    --menu-color: #1F2833;
+    --menu-border: rgb(37, 37, 37);
+    --menu-hover: #67018f;
+    --text-color: #F0F0F0;
+    --header-color: #330147;
 }
 
-body{
-    background-color: var(--space);
-    color: var(--text);
+/* BODY */
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
     text-align: center;
     width: 100%;
     height: 100%;
-    font-family: 'Orbitron',sans-serif;
+    font-family: 'Orbitron', sans-serif;
+    overflow-x: hidden; /* Empêche le scroll horizontal inutile */
 }
 
-.loadingGIF{
+/* LOADING & BACKGROUND */
+.loadingGIF, .background-vid {
     width: 100%;
     height: 100%;
-    z-index: 1000;
     object-fit: cover;
     position: fixed;
     top: 0;
     left: 0;
 }
-.background-vid{
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    object-fit: cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-}
-.title{
+
+.loadingGIF { z-index: 1000; }
+.background-vid { z-index: -1; }
+
+/* TITLES */
+.title {
     box-shadow: 10px 10px 14px #6C3483;
     color: #9c6caf;
     font-size: xx-large;
 }
-/*menu défilant*/
-.toolpip{
+
+/* MENU DÉFILANT */
+.toolpip {
     position: relative;
     z-index: 10;
 }
-.toolpip ul{
+.toolpip ul {
     display: none;
     padding: 10px;
     position: absolute;
-    background-color: var(--space-menu);
-    border: 1px solid var(--space-menu-border);
+    background-color: var(--menu-color);
+    border: 1px solid var(--menu-border);
     list-style: none;
 }
-.toolpip:hover ul{
+.toolpip:hover ul {
     display: block;
-    background-color: var(--space-hover);
+    background-color: var(--menu-hover);
 }
-.toolpip ul:hover .arrow,.toolpip .arrow:hover,.toolpip:hover .arrow,.arrow:hover{
-    transform: rotate(90deg);
-}
-.toolpip:hover{
+.toolpip:hover {
     cursor: pointer;
 }
+.toolpip .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease; /* pour la rotation fluide */
+}
 
-/*bar de navigation*/
-.navigationBar{
+.toolpip:hover .arrow {
+    transform: rotate(90deg);
+}
+
+
+/* NAVIGATION */
+.navigationBar {
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    background-color: var(--space-header);
+    background-color: var(--header-color);
     width: 100%;
-    color: var(--text);
+    color: var(--text-color);
     height: 2rem;
-    box-shadow: 5px #38004e;
+    box-shadow: 0 2px 5px #38004e;
     position: fixed;
     z-index: 100;
 }
-.navigationBar a,Link{
+
+.navigationBar a,
+.nav-link {
     text-decoration: none;
-    color: var(--text);
+    color: var(--text-color);
+    transition: color 0.3s;
 }
-.divEntre{
+.navigationBar a:hover,
+.nav-link:hover {
+    color: var(--menu-hover);
+}
+
+/* DIV ENTRE NAVIGATION ET CONTENU */
+.divEntre {
     height: 2rem;
     background-color: black;
     width: 100%;
 }
 
-/*scrollbar*/
+/* SCROLLBAR (Chrome + Firefox) */
+.scrollable-div {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: orange #222; /* Firefox */
+}
 .scrollable-div::-webkit-scrollbar {
     width: 8px;
     height: 8px;
 }
-
 .scrollable-div::-webkit-scrollbar-track {
-    background: #222; /* couleur du fond de la scrollbar */
+    background: #222;
     border-radius: 4px;
 }
-
 .scrollable-div::-webkit-scrollbar-thumb {
-    background: orange; /* couleur de la barre */
+    background: orange;
     border-radius: 4px;
 }
-
 .scrollable-div::-webkit-scrollbar-thumb:hover {
-    background: #ffb84d; /* couleur au survol */
+    background: #ffb84d;
 }
-/*Research fenetre*/
-.research{
+
+/* RESEARCH WINDOW */
+.research {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     gap: 1rem;
     position: absolute;
     width: 400px;
     height: 400px;
-    background-color: var(--space);
+    background-color: var(--background-color);
     z-index: 100;
     max-width: 400px;
-    overflow: scroll;
+    overflow-y: auto;
 }
-.research-item img{
+.research-item img {
     object-fit: contain;
     max-width: 200px;
 }
-/*poster HOME*/
-.homePoster{
+
+/* HOME POSTER */
+.homePoster {
     position: relative;
     width: 100%;
-    height: 100%;
-    margin: 1rem;
+    height: auto;
+    margin: 1rem auto;
     object-fit: contain;
-}
-/*Film liste home*/
-.movie{
-    position: relative;
-    width: min-content;
-    height: min-content;
-    margin-top: 50px;
-    object-fit: contain;
-}
-.movieContainer{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    gap: 30px;
 }
 
-a,Link,button:hover{
+/* MOVIE GRID */
+.movieContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 60px;
+    padding: 0 1rem;
+}
+.movie {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.movie img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.movie img:hover {
+    transform: scale(1.05);
+}
+
+/* LINK / BUTTON CURSOR */
+a, .nav-link, button {
     cursor: pointer;
 }
+button {
+    background-color: rgb(181, 118, 1);
+    border: solid black;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+}
+button:hover {
+    transform: scale(1.2);
+    background-color: orange;
+}
 
-/*Login/Register*/
-
-.login{
+/* LOGIN / REGISTER */
+.login {
     position: absolute;
     border: solid 2px #0B0C10;
     box-shadow: 2px 2px 6px orange;
@@ -166,80 +205,103 @@ a,Link,button:hover{
     height: 300px;
     padding: 10px;
     color: #F0F0F0;
-    left: 40%;
+    left: 50%;
     top: 35%;
+    transform: translateX(-50%);
     overflow: hidden;
 }
-
-.login input{
-    border: solid 2px var(--space-header);
+.login input {
+    border: solid 2px var(--header-color);
     border-radius: 5px;
     margin: 1rem;
 }
 .vidbg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
 }
 .login-content {
-  position: relative;
-  z-index: 1;
-  padding: 10px;
-}
-/*BTN*/
-button{
-    background-color: rgb(181, 118, 1);
-    border: solid black;
-    margin: 1rem;
-}
-button:hover{
-    transform: scale(1.2);
-    background-color: orange;
-}
-img:hover{
-    transform: scale(1.1);
-    transition-duration: 0.5s;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
 }
 
-/*watchlist*/
-
-.watchlistContainer{
+/* WATCHLIST */
+.watchlistContainer {
     height: 20rem;
     width: 100%;
     display: flex;
     flex-direction: row;
     gap: 10px;
     justify-content: flex-start;
-    overflow: scroll;
-    cursor: pointer;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
 }
-.watchlistImg{
+.watchlistImg {
     object-fit: contain;
     width: 5rem;
     height: 5rem;
+    margin: 0.2rem;
     cursor: pointer;
-    margin: auto;
-    margin: 0.2rem 0.2rem 0.2rem 0.1rem;
 }
 
-/*Options/paramètres*/
-
-.optionPage{
+/* OPTIONS / PARAMS */
+.optionPage {
     margin-top: 50px;
-    overflow: scroll;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 15vw;
+    gap: 5vw;
+    padding: 0 1rem;
 }
-.optionPage p{
-    margin: 10vw;
-    padding: 10vw;
+.optionPage p {
+    margin: 1rem 0;
 }
 
-section{
+/* SECTION & PAGING */
+section {
     margin-top: 100px;
+}
+.paging {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    gap: 10px; 
+    margin: 2rem 0; 
+}
+
+.paging button {
+    background-color: #330147;
+    color: var(--text);
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.paging button:hover {
+    background-color: var(--space-hover);
+    transform: scale(1.1);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .movieContainer {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 10px;
+    }
+    .research {
+        width: 300px;
+        height: 300px;
+    }
+    section {
+        margin-top: 50px;
+    }
 }
