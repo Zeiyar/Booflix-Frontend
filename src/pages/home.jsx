@@ -90,13 +90,13 @@ function Home (){
             value={year}
             />
 
-        <button onClick={abo === "Gratuit" ? navigate("/params") :
+        <button onClick={()=>{abo === "Gratuit" ? navigate("/params") :
             abo==="Premium"&&
         <>
         <p>Bravo vous êtes premium trop fort !</p>
         <button onClick={accèsContenuPremium}>Accéder au contenu Premium</button>
         </>
-        }>Si vous êtes premium un text s affiche si vous appuyer sinon il vous redirige</button>
+        }}>Si vous êtes premium un text s affiche si vous appuyer sinon il vous redirige</button>
 
             {watchlist && <section>
                 <h2>Continuer à Regarder</h2>

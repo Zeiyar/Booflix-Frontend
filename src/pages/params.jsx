@@ -146,10 +146,7 @@ function Params (){
     return (
         <main className="optionsPage">
         <header>
-            <h1>MOUHAHAHAHA</h1>
-            <p>Welcome to params</p>
-            <a href="#abo">Abonnement</a>
-            <a href="#mdp">Changer de mdp</a>
+            <a href="#abo">Abonnement</a><p>   </p><a href="#mdp">Changer de mdp</a>
             <p>N'hésiter pas a nous poster vos problèmes sur ce <a href="https://reablog.netlify.app/" target="_blank">blog</a> 
              que j ai créer uniquement pour ça (ouiouioui) si vous voulez que je rajoute des films ou séries aussi !</p>
         </header>
@@ -175,11 +172,10 @@ function Params (){
             </div>
 
             <div>
-                <h3>A décider de miser sur soi même et toute sa famille</h3>
+                <h3>A décider de miser sur soi même et toute sa famille</h3><br/>
                 <p>6 adresse ip wowwww je ne veux pas dire mais c est surement la meilleur offre</p>
                 <p>changer autant de fois que vous voulez même les voisins peuvent se connecter et partager l abonnement!!</p>
                 <p>recevez aussi une casquette broder (porter par le dévelloppeur du site clin d oeil)</p>
-                <p>si vous aimez les danseur bg et muscler je m engage personnellement a venir danser chez vous</p>
                 <strong>9.99e!!!</strong><strong>   ̶ ̶1̶4̶.̶9̶9̶ </strong>
                 <button onClick={()=>handleSubscription("Premium")} 
                 disabled={loading||abo==="Premium"}>{loading ? "Chargement..." : "Choisir"}</button>
