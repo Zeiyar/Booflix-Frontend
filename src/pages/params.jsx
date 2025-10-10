@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 
 function Params (){
-    const searchParams = useSearchParams();
+    const [searchParams] = useSearchParams();
     const sessionId = searchParams("session_id");
     const cancel = searchParams("cancel");
 
@@ -32,9 +32,9 @@ function Params (){
             fetch(`https://bubleflix-backend.onrender.com/api/subscription/session/${sessionId}`,{
                 method:"GET",
                 headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
-            }).then(res => res.json)
+            }).then(res => res.json())
             .then(data => {
-                if (data.plan) setAbo(data.plan);
+                if (data?.plan) setAbo(data.plan);
                 console.log("session stripe récupérer : ",data);
             })
             .catch(console.error);
@@ -136,6 +136,7 @@ function Params (){
             localStorage.removeItem("token");
             navigate("/");
         })
+        .catch(console.error);
     }
 /*<p>Vous avez actuellement l abonnement {abo} et il vous reste {temps} pour changer d adresse ip</p>
  mettre dans abo quand probleme et solution trouvé
