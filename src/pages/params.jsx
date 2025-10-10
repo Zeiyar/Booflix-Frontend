@@ -30,7 +30,7 @@ function Params (){
         }
         if(sessionId){
             console.log("Session ID récupéré:", sessionId);
-            fetch(`https://bubleflix-backend.onrender.com/api/subscription`,{
+            fetch(`https://bubleflix-backend.onrender.com/api/subscription/session/${sessionId}`,{
                 method:"GET",
                 headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
             }).then(res => res.json())
@@ -146,7 +146,8 @@ function Params (){
     return (
         <main className="optionsPage">
         <header>
-            <a href="#abo">Abonnement</a><p>   </p><a href="#mdp">Changer de mdp</a>
+            <br/><br/><br/>
+            <a href="#abo">Abonnement</a><p>   </p><a href="#mdp">Changer de mdp</a><br/>
             <p>N'hésiter pas a nous poster vos problèmes sur ce <a href="https://reablog.netlify.app/" target="_blank">blog</a> 
              que j ai créer uniquement pour ça (ouiouioui) si vous voulez que je rajoute des films ou séries aussi !</p>
         </header>
@@ -154,7 +155,7 @@ function Params (){
         <section>
             <h2 id="abo">Change d'Abonnement</h2>
             <strong>vous pouvez changer d adresse autant que vous voulez pendant 1 semaine</strong>
-            <p>Vous avez actuellement l abonnement {abo}</p>
+            <p>Vous avez actuellement l abonnement <strong>{abo}</strong></p><br/>
             <div>
                 <h3>Basic</h3>
                 <p>limitation a 1 adresse ip que vous choisissez en vous connectant</p>
