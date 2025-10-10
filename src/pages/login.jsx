@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgVideo from "../image/Space-Run-Art-GIF-by-PERFECTL00P.mp4";
 import vidBg from "../image/Running-Man-Space-GIF.mp4";
@@ -9,7 +9,7 @@ function Login (){
     const [password,setPassword] = useState("");
     const [loading,setLoading] = useState(false);
     const navigate = useNavigate();
-    
+
     const handleSubmit = async(e) => {
         e.preventDefault()
         try {
@@ -31,6 +31,15 @@ function Login (){
 
         localStorage.setItem("user",JSON.stringify(user));
         localStorage.setItem("token",token);
+
+        useEffect(()=>{
+            fetch("https://bubleflix-backend.onrender.com/api/subscription",{
+                headers: {authorization : `Bearer ${token}`}
+            })
+                .then(res => res.json())
+                .then(data=> localStorage.setItem("abo",data.plan||"Gratuit"))
+                .catch(console.error)
+        },[]);
 
         setLoading(true);
         setTimeout(()=>{

@@ -14,13 +14,13 @@ function Params (){
     const [loading,setLoading] = useState(false);
     const [message,setMessage] = useState("Ton mot de passe est toujours le même");
     const [same,setSame] = useState("");
-    const [abo,setAbo] = useState("Gratuit");
     const navigate = useNavigate();
     /*const [temps,] = useState("1 Semaine");*/
     
     const rules = newPassword ? /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(newPassword): false;
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user")||"{}");
+    const abo = localStorage.getItem("abo")
     const email = user?.email;
 
     useEffect(()=>{
@@ -34,7 +34,7 @@ function Params (){
                 headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
             }).then(res => res.json())
             .then(data => {
-                if (data?.plan) setAbo(data.plan);
+                if (data?.plan) localStorage.setItem("abo",data.plan);
                 console.log("session stripe récupérer : ",data);
             })
             .catch(console.error);
