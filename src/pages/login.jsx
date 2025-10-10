@@ -38,7 +38,7 @@ function Login (){
             headers: {authorization : `Bearer ${token}`}
             })
             const subData = await subRes.json()
-            localStorage.setItem("abo",subData.plan||"Gratuit"))
+            localStorage.setItem("abo",subData.plan||"Gratuit");
             
         }catch(error){
             console.error("Erreur fetch subscription:", err);
