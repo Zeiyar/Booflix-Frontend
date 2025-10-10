@@ -218,7 +218,7 @@ function Params (){
                     {message && <p>{message}</p>}
             </form>
         </section>
-        <button style={{background: "red",height:"50px",width:"100px"}} onClick={logout}>Déconnexion</button>
+        <button style={{background: "red",height:"50px",width:"150px"}} onClick={logout}>Déconnexion</button>
         </main>
     )
 }
