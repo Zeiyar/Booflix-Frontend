@@ -90,7 +90,7 @@ function Home (){
             value={year}
             />
 
-        <button onClick={abo === "Free" ? navigate("/params") :
+        <button onClick={abo === "Gratuit" ? navigate("/params") :
             abo==="Premium"&&
         <>
         <p>Bravo vous êtes premium trop fort !</p>
