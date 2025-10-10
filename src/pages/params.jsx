@@ -5,8 +5,8 @@ import { useSearchParams } from "react-router-dom";
 
 function Params (){
     const [searchParams] = useSearchParams();
-    const sessionId = searchParams("session_id");
-    const cancel = searchParams("cancel");
+    const sessionId = searchParams.get("session_id");
+    const cancel = searchParams.get("cancel");
 
     const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
     const [oldPassword,setOldPassword] = useState("");
@@ -113,7 +113,7 @@ function Params (){
             return;
         }
 
-        setAbo(plan);
+
         const stripe = await stripePromise;
         console.log("Stripe object:", stripe);
 
@@ -128,7 +128,7 @@ function Params (){
  
 
     function logout(){
-        fetch("/logout",({
+        fetch("https://bubleflix-backend.onrender.com/api/auth/logout",({
             method:"POST",
             credentials: "include",
         }))
