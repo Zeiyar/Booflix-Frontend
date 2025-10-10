@@ -30,7 +30,7 @@ function Params (){
         }
         if(sessionId){
             console.log("Session ID récupéré:", sessionId);
-            fetch(`https://bubleflix-backend.onrender.com/api/subscription/session/${sessionId}`,{
+            fetch(`https://bubleflix-backend.onrender.com/api/subscription`,{
                 method:"GET",
                 headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
             }).then(res => res.json())
