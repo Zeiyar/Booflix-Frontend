@@ -1,8 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 function Params (){
+    const searchParams = useSearchParams();
+    const sessionId = searchParams("session_id");
+    const cancel = searchParams("cancel");
+
     const stripePromise = loadStripe(import.meta.env.VITE_APP_STRIPE_PUBLISHABLE_KEY);
     const [oldPassword,setOldPassword] = useState("");
     const [newPassword,setNewPassword] = useState("");
@@ -17,6 +22,25 @@ function Params (){
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user")||"{}");
     const email = user?.email;
+
+    useEffect(()=>{
+        if(cancel){
+            alert("paiement annulé :(")
+            return;
+        }
+        if(sessionId){
+            fetch(`https://bubleflix-backend.onrender.com/api/subscription/session/${sessionId}`,{
+                method:"GET",
+                headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
+            }).then(res => res.json)
+            .then(data => {
+                if (data.plan) setAbo(data.plan);
+                console.log("session stripe récupérer : ",data);
+            })
+            .catch(console.error);
+        }
+
+    },[sessionId,cancel]);
 
     const handleModify = async(e) => {
         e.preventDefault();
