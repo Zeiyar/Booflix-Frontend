@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import bgVideo from "../image/Space-Run-Art-GIF-by-PERFECTL00P.mp4";
 import vidBg from "../image/Running-Man-Space-GIF.mp4";
@@ -32,14 +32,18 @@ function Login (){
         localStorage.setItem("user",JSON.stringify(user));
         localStorage.setItem("token",token);
 
-        useEffect(()=>{
-            fetch("https://bubleflix-backend.onrender.com/api/subscription",{
-                headers: {authorization : `Bearer ${token}`}
+        
+        try {
+            const subRes = await fetch("https://bubleflix-backend.onrender.com/api/subscription",{
+            headers: {authorization : `Bearer ${token}`}
             })
-                .then(res => res.json())
-                .then(data=> localStorage.setItem("abo",data.plan||"Gratuit"))
-                .catch(console.error)
-        },[]);
+            const subData = await subRes.json()
+            localStorage.setItem("abo",subData.plan||"Gratuit"))
+            
+        }catch(error){
+            console.error("Erreur fetch subscription:", err);
+            localStorage.setItem("abo", "Gratuit");
+        }
 
         setLoading(true);
         setTimeout(()=>{
