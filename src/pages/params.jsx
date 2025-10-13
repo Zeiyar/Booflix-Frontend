@@ -23,25 +23,53 @@ function Params (){
     const abo = localStorage.getItem("abo")
     const email = user?.email;
 
-    useEffect(()=>{
-        if(cancel){
-            alert("paiement annulé :(")
-            return;
-        }
-        if(sessionId){
-            console.log("Session ID récupéré:", sessionId);
-            fetch(`https://bubleflix-backend.onrender.com/api/subscription`,{
-                method:"GET",
-                headers: {"Content-Type":"application/json",Authorization : `Bearer ${token}`},
-            }).then(res => res.json())
-            .then(data => {
-                if (data?.plan) localStorage.setItem("abo",data.plan);
-                console.log("session stripe récupérer : ",data);
-            })
-            .catch(console.error);
-        }
+    useEffect(() => {
+    if (cancel) {
+        alert("Paiement annulé :(");
+        return;
+    }
+    if (sessionId) {
+        console.log("Session ID récupéré:", sessionId);
 
-    },[sessionId,cancel]);
+        const token = localStorage.getItem("token");
+
+        let attempts = 0;         
+        const maxAttempts = 10;     
+        const interval = 2000;
+
+        const polling = setInterval(async () => {
+            attempts++;
+
+            try {
+                const res = await fetch(`https://bubleflix-backend.onrender.com/api/subscription`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                const data = await res.json();
+                console.log("Polling :", data);
+
+                if (data?.plan) {
+                    localStorage.setItem("abo", data.plan);
+                    console.log("Plan trouvé :", data.plan);
+                    clearInterval(polling);
+                } else if (attempts >= maxAttempts) {
+                    console.warn("Plan non disponible après plusieurs essais");
+                    clearInterval(polling);
+                }
+            } catch (err) {
+                console.error("Erreur polling :", err);
+                clearInterval(polling);
+            }
+        }, interval);
+
+        return () => clearInterval(polling);
+    }
+}, [sessionId, cancel]);
+
 
     const handleModify = async(e) => {
         e.preventDefault();
