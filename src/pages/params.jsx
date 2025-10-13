@@ -30,7 +30,7 @@ function Params (){
     }
     if (sessionId) {
         console.log("Session ID récupéré:", sessionId);
-
+        
         const token = localStorage.getItem("token");
 
         let attempts = 0;         
@@ -52,7 +52,7 @@ function Params (){
                 const data = await res.json();
                 console.log("Polling :", data);
 
-                if (data?.plan) {
+                if (data?.plan!=="Free" && data?.plan) {
                     localStorage.setItem("abo", data.plan);
                     console.log("Plan trouvé :", data.plan);
                     clearInterval(polling);
