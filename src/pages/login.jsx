@@ -28,7 +28,7 @@ function Login (){
         const user = {
             id: userId, email: data.user.email
         }
-
+        localStorage.setItem("userId",JSON.stringify(userId));
         localStorage.setItem("user",JSON.stringify(user));
         localStorage.setItem("token",token);
 

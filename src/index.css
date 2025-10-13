@@ -290,7 +290,105 @@ section {
     background-color: var(--space-hover);
     transform: scale(1.1);
 }
+/*options params*/
+.optionsPage {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
 
+/* Header */
+.optionsPage header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.optionsPage header a {
+    color: #1E90FF; /* Bleu lumineux */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.optionsPage header a:hover {
+    color: #00CED1; /* Turquoise */
+}
+
+.optionsPage header p {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Sections */
+.optionsPage section {
+    margin-bottom: 60px;
+}
+
+.optionsPage h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #1E90FF;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.optionsPage section h3 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #FFD700; /* Or clair pour attirer l’œil */
+}
+
+.optionsPage section p, .optionsPage section strong {
+    margin: 10px 0;
+}
+
+/* Abonnement div */
+.optionsPage section > div {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+}
+
+/* Formulaire mot de passe */
+.optionsPage form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.optionsPage input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+}
+
+.optionsPage input::placeholder {
+    color: #aaa;
+}
+
+.optionsPage strong {
+    color: #FF6347; /* Rouge clair pour messages d’erreur */
+}
+
+/* Déconnexion */
+.optionsPage > button {
+    display: block;
+    margin: 30px auto 0 auto;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.optionsPage > button:hover {
+    background: #ff4c4c;
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .movieContainer {
@@ -305,3 +403,14 @@ section {
         margin-top: 50px;
     }
 }
+@media screen and (max-width: 600px) {
+    .optionsPage header a {
+        display: block;
+        margin: 10px 0;
+    }
+
+    .optionsPage {
+        padding: 20px 10px;
+    }
+}
+

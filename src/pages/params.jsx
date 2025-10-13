@@ -52,10 +52,14 @@ function Params (){
                 const data = await res.json();
                 console.log("Polling :", data);
 
-                if (data?.plan!=="Free" && data?.plan) {
+                if (data?.plan!==localStorage.getItem("abo") && data?.plan) {
                     localStorage.setItem("abo", data.plan);
                     console.log("Plan trouvé :", data.plan);
                     clearInterval(polling);
+                if (!data?.plan){
+                    localStorage.setItem("abo","Gratuit");
+                    console.log("Utilisateur désabonné, plan mis à Free");
+                }
                 } else if (attempts >= maxAttempts) {
                     console.warn("Plan non disponible après plusieurs essais");
                     clearInterval(polling);
@@ -154,7 +158,30 @@ function Params (){
         setLoading(false);
     }
 };
- 
+    const handleDeleteSubsciption = async()=>{
+        const confirm = window.confirm("Voulez vous vraiment annulez votre abonnement ?")
+        if (!confirm) return;
+
+        try {
+            fetch("https://bubleflix-backend.onrender.com/api/subscription/unsubscibe",{
+                method: "DELETE",
+                headers: ({"Content-Type":"application/json",
+                    Authorization: `Bearer ${token}`,
+                })
+            })
+            if (!res.ok) {
+            const data = await res.json();
+            alert(data.msg || "Erreur lors de la désinscription");
+            return;
+            }
+
+            alert("Abonnement annulé avec succès !");
+            localStorage.setItem("abo", "Gratuit");
+        } catch (err) {
+            console.error(err);
+            alert("Erreur réseau");
+  }
+};
 
     function logout(){
         fetch("https://bubleflix-backend.onrender.com/api/auth/logout",({
@@ -189,7 +216,9 @@ function Params (){
                 <p>limitation a 1 adresse ip que vous choisissez en vous connectant</p>
                 <p>possibilité de la changer tout les 6 mois (comme basicfit lol)</p>
                 <p>4.99e</p>
-                <button onClick={()=>handleSubscription("Basic")} disabled={loading||abo==="Basic"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={()=>{(abo==="Basic")? handleDeleteSubsciption()
+                : handleSubscription("Basic")}} 
+                disabled={loading}>{loading ? "Chargement..." : abo==="Basic"?"Se désabonner":"Choisir"}</button>
             </div>
 
             <div>
@@ -197,7 +226,9 @@ function Params (){
                 <p>3 adresse ip qui seront aussi choisi en vous connectant avec les trois adresse</p>
                 <p>changer aussi tout les 6 mois mais pour les trois dcp 3 changement tout les 6 mois</p>
                 <p>6.99</p>
-                <button onClick={()=>handleSubscription("Styled")} disabled={loading||abo==="Styled"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={()=>{(abo==="Styled")? handleDeleteSubsciption()
+                : handleSubscription("Styled")}} 
+                disabled={loading}>{loading ? "Chargement..." : abo==="Styled"?"Se désabonner":"Choisir"}</button>
             </div>
 
             <div>
@@ -206,8 +237,9 @@ function Params (){
                 <p>changer autant de fois que vous voulez même les voisins peuvent se connecter et partager l abonnement!!</p>
                 <p>recevez aussi une casquette broder (porter par le dévelloppeur du site clin d oeil)</p>
                 <strong>9.99e!!!</strong><strong>   ̶ ̶1̶4̶.̶9̶9̶ </strong>
-                <button onClick={()=>handleSubscription("Premium")} 
-                disabled={loading||abo==="Premium"}>{loading ? "Chargement..." : "Choisir"}</button>
+                <button onClick={()=>{(abo==="Premium")? handleDeleteSubsciption()
+                : handleSubscription("Premium")}} 
+                disabled={loading}>{loading ? "Chargement..." : abo==="Premium"?"Se désabonner":"Choisir"}</button>
             </div>
         </section>
 

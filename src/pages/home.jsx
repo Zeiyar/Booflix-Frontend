@@ -11,6 +11,7 @@ function Home (){
     const userId = localStorage.getItem("userId");
     const [videoUrl,setVideoUrl] = useState(null);
     const abo = localStorage.getItem("abo");
+    const [premium,setPremium] = useState("Si vous êtes premium un text s affiche si vous appuyer sinon il vous redirige")
 
     useEffect(()=>{
         fetch(`https://bubleflix-backend.onrender.com/watchlist/${userId}`)
@@ -90,13 +91,9 @@ function Home (){
             value={year}
             />
 
-        <button onClick={()=>{abo === "Gratuit" ? navigate("/params") :
-            abo==="Premium"&&
-        <>
-        <p>Bravo vous êtes premium trop fort !</p>
-        <button onClick={accèsContenuPremium}>Accéder au contenu Premium</button>
-        </>
-        }}>Si vous êtes premium un text s affiche si vous appuyer sinon il vous redirige</button>
+        <button onClick={()=>{abo === "Gratuit"||abo==="Free" ? navigate("/params") :
+            abo==="Premium"&& setPremium("Bravo vous êtes premium trop fort!!")
+        }}>{premium}</button>
 
             {watchlist && <section>
                 <h2>Continuer à Regarder</h2>
