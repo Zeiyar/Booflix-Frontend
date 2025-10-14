@@ -201,14 +201,14 @@ function Params (){
     return (
         <main className="optionsPage">
         <header>
-            <br/><br/><br/>
-            <a href="#abo">Abonnement</a><p>   </p><a href="#mdp">Changer de mdp</a><br/>
+            <br/><br/>
+            <p><a href="#abo">Abonnement    </a>   <a href="#mdp">    Changer de mdp</a></p><br/>
             <p>N'hésiter pas a nous poster vos problèmes sur ce <a href="https://reablog.netlify.app/" target="_blank">blog</a> 
              que j ai créer uniquement pour ça (ouiouioui) si vous voulez que je rajoute des films ou séries aussi !</p>
         </header>
         
         <section>
-            <h2 id="abo">Change d'Abonnement</h2>
+            <h2 id="abo">Changez d'Abonnement</h2><br/>
             <strong>vous pouvez changer d adresse autant que vous voulez pendant 1 semaine</strong>
             <p>Vous avez actuellement l abonnement <strong>{abo}</strong></p><br/>
             <div>
@@ -225,7 +225,7 @@ function Params (){
                 <h3>Stylé</h3>
                 <p>3 adresse ip qui seront aussi choisi en vous connectant avec les trois adresse</p>
                 <p>changer aussi tout les 6 mois mais pour les trois dcp 3 changement tout les 6 mois</p>
-                <p>6.99</p>
+                <p>6.99e</p>
                 <button onClick={()=>{(abo==="Styled")? handleDeleteSubsciption()
                 : handleSubscription("Styled")}} 
                 disabled={loading}>{loading ? "Chargement..." : abo==="Styled"?"Se désabonner":"Choisir"}</button>
@@ -236,7 +236,7 @@ function Params (){
                 <p>6 adresse ip wowwww je ne veux pas dire mais c est surement la meilleur offre</p>
                 <p>changer autant de fois que vous voulez même les voisins peuvent se connecter et partager l abonnement!!</p>
                 <p>recevez aussi une casquette broder (porter par le dévelloppeur du site clin d oeil)</p>
-                <strong>9.99e!!!</strong><strong>   ̶ ̶1̶4̶.̶9̶9̶ </strong>
+                <strong>9.99e!!!</strong><p>    </p><p>1̶4̶.̶9̶9̶e </p>
                 <button onClick={()=>{(abo==="Premium")? handleDeleteSubsciption()
                 : handleSubscription("Premium")}} 
                 disabled={loading}>{loading ? "Chargement..." : abo==="Premium"?"Se désabonner":"Choisir"}</button>
@@ -244,8 +244,7 @@ function Params (){
         </section>
 
         <section>
-            <h2 id="mdp">Change de mot de passe</h2>
-            <span>{email}</span>
+            <h2 id="mdp">Change de mot de passe juste ici {email} !</h2>
             <form onSubmit={handleModify}>
                 
                 <input
